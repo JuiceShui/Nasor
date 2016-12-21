@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@color/colorBackground"
+    android:layout_height="wrap_content">
+    <android.support.v7.widget.CardView
+        android:layout_marginTop="@dimen/space_size_6"
+        android:layout_marginStart="@dimen/space_size_8"
+        android:layout_marginEnd="@dimen/space_size_8"
+        android:layout_marginBottom="@dimen/space_size_2"
+        app:cardBackgroundColor="@color/colorCard"
+        app:contentPadding="@dimen/space_size_6"
+        app:cardElevation="@dimen/space_size_2"
+        app:cardCornerRadius="@dimen/space_size_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.shui.nasor.Widget.SquareImageView
+                android:id="@+id/likeImageView"
+                android:layout_width="@dimen/list_image_size"
+                android:layout_height="@dimen/list_image_size" />
+            <TextView
+                android:id="@+id/likeTVTitle"
+                android:textSize="@dimen/text_size_big"
+                android:layout_marginStart="@dimen/space_size_6"
+                android:textColor="@color/comment_text"
+                android:layout_toRightOf="@+id/likeImageView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/likeTVFrom"
+                android:textSize="@dimen/text_size_normal"
+                android:layout_marginTop="@dimen/space_size_3"
+                android:layout_below="@+id/likeImageView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

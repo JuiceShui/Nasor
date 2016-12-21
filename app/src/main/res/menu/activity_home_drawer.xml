@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_zhihu"
+            android:checked="true"
+            android:checkable="true"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="知乎日报" />
+        <item
+            android:id="@+id/nav_news"
+            android:checkable="true"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="新闻精选" />
+        <item
+            android:id="@+id/nav_wechat"
+            android:checkable="true"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="微信精华" />
+        <item
+            android:id="@+id/nav_relax"
+            android:checkable="true"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="轻松时刻" />
+    </group>
+
+    <item android:title="选项">
+        <menu>
+            <item
+                android:id="@+id/nav_like"
+                android:checkable="true"
+                android:icon="@mipmap/ic_drawer_like"
+                android:title="收藏"
+                />
+            <item
+                android:id="@+id/nav_setting"
+                android:checkable="true"
+                android:icon="@drawable/ic_menu_share"
+                android:title="设置" />
+            <item
+                android:id="@+id/nav_about"
+                android:checkable="true"
+                android:icon="@drawable/ic_menu_send"
+                android:title="关于" />
+        </menu>
+    </item>
+
+</menu>

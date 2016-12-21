@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/afternoon"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="location" />
+
+        <TextView
+            android:id="@+id/tv_xy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="当前坐标：" />
+
+        <TextView
+            android:id="@+id/tv_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="当前城市：" />
+
+        <TextView
+            android:id="@+id/tv_cityid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="地区：" />
+
+        <TextView
+            android:id="@+id/tv_weather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="天气：" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/iv_weather_icon"
+            />
+</LinearLayout>

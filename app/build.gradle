@@ -1,0 +1,73 @@
+apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
+apply plugin: 'realm-android'
+android {
+    compileSdkVersion 25
+    buildToolsVersion "24.0.2"
+    defaultConfig {
+        applicationId "com.shui.nasor"
+        minSdkVersion 21
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    sourceSets {
+        main.jniLibs.srcDirs = ['libs']
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    signingConfigs {
+
+        release {
+            storeFile file("C:/shui.jks")
+            storePassword "shui199455"
+            keyAlias "shui"
+            keyPassword "shui199455"
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:25.0.0'
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:design:25.0.0'
+    compile 'com.android.support:cardview-v7:25.0.0'
+    compile 'com.android.support:recyclerview-v7:25.0.0'
+    //rx
+    compile 'io.reactivex:rxjava:1.1.0'
+    compile 'io.reactivex:rxandroid:1.1.0'
+    compile 'com.jakewharton.rxbinding:rxbinding:0.4.0'
+    //network
+    compile 'com.google.code.gson:gson:2.4'
+    compile 'com.squareup.retrofit2:retrofit:2.0.2'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.2'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
+    compile 'com.squareup.okhttp3:okhttp:3.2.0'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.0.1'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.github.bumptech.glide:okhttp3-integration:1.4.0@aar'
+    //di
+    compile 'com.google.dagger:dagger:2.0.2'
+    compile 'com.google.dagger:dagger-compiler:2.0.2'
+    compile 'com.jakewharton:butterknife:8.2.1'
+    apt 'com.jakewharton:butterknife-compiler:8.2.1'
+    provided 'org.glassfish:javax.annotation:10.0-b28'
+    //other
+    compile 'me.yokeyword:fragmentation:0.8.2'
+    compile 'pub.devrel:easypermissions:0.2.0'
+    //widget
+    compile 'com.github.chrisbanes:PhotoView:1.3.0'
+    compile 'com.miguelcatalan:materialsearchview:1.4.0'
+    compile 'jp.wasabeef:glide-transformations:1.2.1'
+    compile files('libs/tbs_sdk_thirdapp_v2.2.0.1096_36549_sharewithdownload_withoutGame_obfs_20160830_211645.jar')
+    compile files('libs/AMap_Location_V3.2.0_20161205.jar')
+}
