@@ -18,6 +18,7 @@ import java.util.Set;
 
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobConfig;
+import cn.smssdk.SMSSDK;
 
 /**
  * 作者： max_Shui on 2016/12/10.
@@ -72,6 +73,9 @@ public class App extends Application {
                 .setFileExpiration(2500)
                 .build();
         Bmob.initialize(config);
+
+        //初始化shareSDK
+        SMSSDK.initSDK(this, "1a1f9cd670800", "630d843599bf94e0b6f90591c7036238");
     }
 
     public void addActivity(Activity act) {

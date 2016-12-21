@@ -19,6 +19,7 @@ import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.shui.nasor.APP.App;
 import com.shui.nasor.APP.Constants;
 import com.shui.nasor.Base.BaseNormalActivity;
+import com.shui.nasor.Model.Bean.MyData.UserInfo;
 import com.shui.nasor.R;
 import com.shui.nasor.Utils.SharedPreferenceUtils;
 import com.shui.nasor.View.About.Fragment.AboutFragment;
@@ -31,6 +32,9 @@ import com.shui.nasor.View.Zhihu.Fragment.ZhiHuMainFragment;
 import com.shui.nasor.Widget.CircleImageView;
 
 import butterknife.BindView;
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.QueryListener;
 import me.yokeyword.fragmentation.SupportFragment;
 
 public class HomeActivity extends BaseNormalActivity {
@@ -90,26 +94,44 @@ public class HomeActivity extends BaseNormalActivity {
         iv_avatar= (CircleImageView) header_view.findViewById(R.id.nav_image_header);
         tv_name= (TextView) header_view.findViewById(R.id.nav_tv_name);
         tv_email= (TextView) header_view.findViewById(R.id.nav_tv_email);
-        iv_avatar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                System.out.println("点击了！------------");
-                CircleImageView imageView= (CircleImageView) findViewById(R.id.nav_image_header);
-                Intent intent=new Intent(HomeActivity.this,UserInfoActivity.class);
-                ActivityOptions options=ActivityOptions.makeSceneTransitionAnimation(HomeActivity.this,imageView,Constants.SHARE_VIEW);
-                startActivity(intent,options.toBundle());
-            }
-        });
         userInfo=SharedPreferenceUtils.getUser();
         if (userInfo=="")//当没有登录的时候
         {
             iv_avatar.setImageResource(R.drawable.header);
             tv_name.setVisibility(View.INVISIBLE);
             tv_email.setText(App.getInstance().getString(R.string.click_to_logo));
+            iv_avatar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    CircleImageView imageView= (CircleImageView) findViewById(R.id.nav_image_header);
+                    Intent intent=new Intent(HomeActivity.this,LoginActivity.class);
+                    ActivityOptions options=ActivityOptions.makeSceneTransitionAnimation(HomeActivity.this,imageView,Constants.SHARE_VIEW);
+                    startActivity(intent,options.toBundle());
+                }
+            });
         }
         else //当已经登陆的时候
         {
-
+            BmobQuery<UserInfo> bmobQuery = new BmobQuery<UserInfo>();
+            bmobQuery.getObject(userInfo, new QueryListener<UserInfo>() {
+                @Override
+                public void done(UserInfo userInfo, BmobException e) {
+                    if (e==null)
+                    {
+                        tv_name.setText(userInfo.getName());
+                        tv_email.setText(userInfo.getEmail());
+                        iv_avatar.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                CircleImageView imageView= (CircleImageView) findViewById(R.id.nav_image_header);
+                                Intent intent=new Intent(HomeActivity.this,UserInfoActivity.class);
+                                ActivityOptions options=ActivityOptions.makeSceneTransitionAnimation(HomeActivity.this,imageView,Constants.SHARE_VIEW);
+                                startActivity(intent,options.toBundle());
+                            }
+                        });
+                    }
+                }
+            });
         }
         setToolbar(toolbar,"知乎日报");
         mZhihuFragment=new ZhiHuMainFragment();

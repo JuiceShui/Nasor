@@ -3,7 +3,7 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-
+    <color name="colorNormal">#F00123</color>
 
     <color name="base_bg">#ffeeeeee</color>
     <color name="base_msg_color">#ff999999</color>
@@ -45,4 +45,5 @@
     <color name="colorText">#2C2C2C</color>
     <color name="colorLogo">#FED530</color>
     <color name="fab_color">#FF4081</color>
+    <color name="button_unenable">#a9a9a9</color>
 </resources>
