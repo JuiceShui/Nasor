@@ -70,4 +70,30 @@
     <string name="hint_password">请输入密码</string>
     <string name="title_activity_login2">Sign in</string>
     <string name="action_forget">忘记密码？</string>
+    <string name="register_hint_phone">手机号</string>
+    <string name="register_hint_code">验证码</string>
+    <string name="register_hint_nick">昵称</string>
+    <string name="register_hint_password">密码(6-16)</string>
+    <string name="register_hint_repassword">重复密码</string>
+    <string name="get_code">获取短信验证码</string>
+    <string name="register_success">完成注册</string>
+
+    <!--modify-->
+    <string name="modify_avatar">头像</string>
+    <string name="modify_name">昵称</string>
+    <string name="modify_id">UID</string>
+    <string name="modify_sex">性别</string>
+    <string name="modify_birthday">生日</string>
+    <string name="modify_sign">个性签名</string>
+    <string name="modify_private">隐私设置</string>
+    <string name="modify_safe">账号安全</string>
+    <string name="modify_cancel">退出登录</string>
+    <string name="modify_save">保存</string>
+    <string name="modify_sex_select">性别选择</string>
+    <string name="modify_sex_confirm">确定</string>
+    <string name="modify_sign_hint">请输入新的个性签名</string>
+    <string name="modify_name_hint">请输入新的昵称</string>
+
+    <!--user-->
+    <string name="user_no_data">╮(╯3╰)╭再怎么找也没有啦~~</string>
 </resources>

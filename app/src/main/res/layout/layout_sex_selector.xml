@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/base_bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_margin="@dimen/space_size_10"
+        android:padding="@dimen/space_size_5"
+        android:gravity="center_vertical|center_horizontal"
+        android:textSize="@dimen/text_size_normal"
+        android:text="@string/modify_sex_select"
+        android:textColor="@color/main_black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <View
+        android:background="@color/main_black"
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"/>
+    <RadioGroup
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:gravity="center_horizontal|center_vertical"
+        android:id="@+id/modify_rg_sex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:button="@null"
+            android:background="@drawable/ic_male_selector"
+            android:layout_alignParentLeft="true"
+            android:checked="true"
+            android:layout_margin="@dimen/space_size_10"
+            android:id="@+id/modify_rb_sex_male"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <RadioButton
+            android:button="@null"
+            android:background="@drawable/ic_female_selector"
+            android:layout_margin="@dimen/space_size_10"
+            android:layout_alignParentRight="true"
+            android:id="@+id/modify_rb_sex_female"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RadioGroup>
+    <Button
+        android:text="@string/modify_sex_confirm"
+        android:id="@+id/modify_btn_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

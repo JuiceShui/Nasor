@@ -36,9 +36,9 @@ public class SharedPreferenceUtils {
     {
         return getAppSp().getString(Constants.SP_POSITION,"");
     }
-    public static void setUser(String position)
+    public static void setUser(String name)
     {
-        getAppSp().edit().putString(Constants.SP_USER_INFO,position).apply();
+        getAppSp().edit().putString(Constants.SP_USER_INFO,name).apply();
     }
     public static String getUser()
     {

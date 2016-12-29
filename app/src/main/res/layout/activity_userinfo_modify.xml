@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/view_toolbar"/>
+    <RelativeLayout
+        android:id="@+id/modify_rl_avatar"
+        android:background="@drawable/edit_bg"
+        android:padding="@dimen/space_size_10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+            <TextView
+                android:padding="@dimen/space_size_10"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/modify_avatar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <com.shui.nasor.Widget.CircleImageView
+                android:id="@+id/modify_civ_avatar"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/header"
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+    android:id="@+id/modify_rl_name"
+    android:background="@drawable/edit_bg"
+    android:padding="@dimen/space_size_10"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:padding="@dimen/space_size_10"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:text="@string/modify_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/modify_tv_name"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:text="max_shui"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/modify_rl_uid"
+        android:background="@drawable/edit_bg"
+        android:padding="@dimen/space_size_10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:padding="@dimen/space_size_10"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="@string/modify_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/modify_tv_uid"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:text=""
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/modify_rl_sex"
+        android:background="@drawable/edit_bg"
+        android:padding="@dimen/space_size_10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:padding="@dimen/space_size_10"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="@string/modify_sex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/modify_tv_sex"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:text="男"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/modify_rl_birthday"
+        android:background="@drawable/edit_bg"
+        android:padding="@dimen/space_size_10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:padding="@dimen/space_size_10"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="@string/modify_birthday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/modify_tv_birthday"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:text="1994-05-05"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/modify_rl_sign"
+        android:background="@drawable/edit_bg"
+        android:padding="@dimen/space_size_10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:padding="@dimen/space_size_10"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="@string/modify_sign"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/modify_tv_sign"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:text="无形装逼，最为致命"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="@dimen/space_size_10"
+        android:id="@+id/modify_rl_private"
+        android:background="@drawable/edit_bg"
+        android:padding="@dimen/space_size_10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/modify_tv_private"
+            android:padding="@dimen/space_size_10"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="@string/modify_private"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/modify_rl_safe"
+        android:background="@drawable/edit_bg"
+        android:padding="@dimen/space_size_10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/modify_tv_safe"
+            android:padding="@dimen/space_size_10"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="@string/modify_safe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="@dimen/space_size_10"
+        android:id="@+id/modify_rl_cancel"
+        android:background="@drawable/edit_bg"
+        android:padding="@dimen/space_size_10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/modify_tv_cancel"
+            android:padding="@dimen/space_size_10"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:text="@string/modify_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+</LinearLayout>

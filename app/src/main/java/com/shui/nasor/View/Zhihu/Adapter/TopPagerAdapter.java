@@ -1,6 +1,9 @@
 package com.shui.nasor.View.Zhihu.Adapter;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +14,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.shui.nasor.Model.Bean.Zhihu.ZhihuDailyEntity;
 import com.shui.nasor.R;
+import com.shui.nasor.View.Zhihu.Activity.ZhihuDetailActivity;
 
 import java.util.List;
 
@@ -56,16 +60,17 @@ public class TopPagerAdapter extends PagerAdapter {
                 .into(imageView);
         textView.setText(bean.getTitle());
         final int id=bean.getId();
+        final String title=bean.getTitle();
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               /** Intent intent = new Intent();
+                Intent intent = new Intent();
                 intent.setClass(mContext, ZhihuDetailActivity.class);
                 imageView.setTransitionName("shareView");
                 intent.putExtra("id",id);
+                intent.putExtra("title",title);
                 ActivityOptions options=ActivityOptions.makeSceneTransitionAnimation((Activity) mContext,imageView,"shareView");
                 mContext.startActivity(intent,options.toBundle());
-                **/
             }
         });
         container.addView(view);

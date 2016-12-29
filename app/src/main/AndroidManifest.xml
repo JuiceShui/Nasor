@@ -24,7 +24,7 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -76,13 +76,12 @@
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="c5c3b80180d40abfda3aadc61cc05294" />
-
-        <activity
-            android:name=".LoginActivity"
-            android:label="@string/title_activity_login" />
-        <activity
-            android:name=".LoginActivity2"
-            android:label="@string/title_activity_login2"></activity>
+        <activity android:name=".View.Home.RegisterActivity" />
+        <activity android:name=".View.Home.LoginActivity" />
+        <activity android:name=".View.Home.UserModifyActivity"
+            android:theme="@style/AppTheme"/>
+        <activity android:name=".View.Home.UserNameModifyActivity" />
+        <activity android:name=".View.Home.UserModifySignActivity" />
     </application>
 
 </manifest>

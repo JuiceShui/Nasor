@@ -19,7 +19,7 @@ import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.shui.nasor.APP.App;
 import com.shui.nasor.APP.Constants;
 import com.shui.nasor.Base.BaseNormalActivity;
-import com.shui.nasor.Model.Bean.MyData.UserInfo;
+import com.shui.nasor.Model.Bean.MyData.BombUserEntity;
 import com.shui.nasor.R;
 import com.shui.nasor.Utils.SharedPreferenceUtils;
 import com.shui.nasor.View.About.Fragment.AboutFragment;
@@ -97,8 +97,10 @@ public class HomeActivity extends BaseNormalActivity {
         userInfo=SharedPreferenceUtils.getUser();
         if (userInfo=="")//当没有登录的时候
         {
+            System.out.println("user null");
             iv_avatar.setImageResource(R.drawable.header);
             tv_name.setVisibility(View.INVISIBLE);
+            tv_email.setVisibility(View.VISIBLE);
             tv_email.setText(App.getInstance().getString(R.string.click_to_logo));
             iv_avatar.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -106,29 +108,35 @@ public class HomeActivity extends BaseNormalActivity {
                     CircleImageView imageView= (CircleImageView) findViewById(R.id.nav_image_header);
                     Intent intent=new Intent(HomeActivity.this,LoginActivity.class);
                     ActivityOptions options=ActivityOptions.makeSceneTransitionAnimation(HomeActivity.this,imageView,Constants.SHARE_VIEW);
-                    startActivity(intent,options.toBundle());
+                    //startActivity(intent,options.toBundle());
+                    startActivityForResult(intent,Constants.ACTIVITY_REQUEST,options.toBundle());
                 }
             });
         }
         else //当已经登陆的时候
         {
-            BmobQuery<UserInfo> bmobQuery = new BmobQuery<UserInfo>();
-            bmobQuery.getObject(userInfo, new QueryListener<UserInfo>() {
+            System.out.println("user have");
+            iv_avatar.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void done(UserInfo userInfo, BmobException e) {
+                public void onClick(View v) {
+                    System.out.println("have on click");
+                    CircleImageView imageView= (CircleImageView) findViewById(R.id.nav_image_header);
+                    Intent intent=new Intent(HomeActivity.this,UserInfoActivity.class);
+                    ActivityOptions options=ActivityOptions.makeSceneTransitionAnimation(HomeActivity.this,imageView,Constants.SHARE_VIEW);
+                    startActivity(intent,options.toBundle());
+                }
+            });
+            BmobQuery<BombUserEntity> bmobQuery = new BmobQuery<>();
+            bmobQuery.getObject(userInfo, new QueryListener<BombUserEntity>() {
+                @Override
+                public void done(BombUserEntity userInfo, BmobException e) {
                     if (e==null)
                     {
+                        System.out.println("enter there");
+                        tv_email.setVisibility(View.VISIBLE);
+                        tv_name.setVisibility(View.VISIBLE);
                         tv_name.setText(userInfo.getName());
                         tv_email.setText(userInfo.getEmail());
-                        iv_avatar.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                CircleImageView imageView= (CircleImageView) findViewById(R.id.nav_image_header);
-                                Intent intent=new Intent(HomeActivity.this,UserInfoActivity.class);
-                                ActivityOptions options=ActivityOptions.makeSceneTransitionAnimation(HomeActivity.this,imageView,Constants.SHARE_VIEW);
-                                startActivity(intent,options.toBundle());
-                            }
-                        });
                     }
                 }
             });
@@ -296,5 +304,19 @@ public class HomeActivity extends BaseNormalActivity {
                 return R.id.nav_news;
         }
         return R.id.nav_zhihu;
+    }
+    //结果回调
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        System.out.println(requestCode+"|||||||"+resultCode);
+        if (requestCode==Constants.ACTIVITY_REQUEST&&resultCode==Constants.ACTIVITY_RESULT)
+        {
+            if (data!=null) {
+                tv_name.setVisibility(View.VISIBLE);
+                tv_name.setText(data.getStringExtra("name"));
+                System.out.println("name"+data.getStringExtra("name"));
+            }
+        }
     }
 }

@@ -75,7 +75,7 @@ public class App extends Application {
         Bmob.initialize(config);
 
         //初始化shareSDK
-        SMSSDK.initSDK(this, "1a1f9cd670800", "630d843599bf94e0b6f90591c7036238");
+        SMSSDK.initSDK(this, "1a39fef440794", "764c21865adb620490ba489edb17bf11");
     }
 
     public void addActivity(Activity act) {

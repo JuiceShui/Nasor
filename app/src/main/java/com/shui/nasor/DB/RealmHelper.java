@@ -2,6 +2,7 @@ package com.shui.nasor.DB;
 
 import android.content.Context;
 
+import com.shui.nasor.Model.Bean.MyData.RealmUserEntity;
 import com.shui.nasor.Model.RealmBean.LikeBean;
 import com.shui.nasor.Model.RealmBean.ReadBean;
 
@@ -131,5 +132,34 @@ public class RealmHelper {
         }
         mRealm.copyToRealmOrUpdate(bean);
         mRealm.commitTransaction();
+    }
+
+    /**
+     * 将用户数据注入本地数据库
+     * @param userInfo
+     */
+    public void InsertUserInfo(RealmUserEntity userInfo)
+    {
+        mRealm.beginTransaction();
+        mRealm.copyToRealmOrUpdate(userInfo);
+        mRealm.commitTransaction();
+    }
+
+    /**
+     * 根据objectID获取用户信息
+     * @param id
+     * @return
+     */
+    public RealmUserEntity queryUserInfo(String id)
+    {
+        RealmResults<RealmUserEntity> results=mRealm.where(RealmUserEntity.class).findAll();
+        for (RealmUserEntity bean:results)
+        {
+            if (bean.getObjectId()==id||bean.getObjectId().equals(id))
+            {
+                return bean;
+            }
+        }
+        return null;
     }
 }

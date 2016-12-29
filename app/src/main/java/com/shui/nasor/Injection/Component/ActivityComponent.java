@@ -5,6 +5,7 @@ import android.app.Activity;
 import com.shui.nasor.Injection.ActivityScope;
 import com.shui.nasor.Injection.Module.ActivityModule;
 import com.shui.nasor.View.Home.HomeActivity;
+import com.shui.nasor.View.Home.UserInfoActivity;
 import com.shui.nasor.View.Home.WeatherActivity;
 import com.shui.nasor.View.Home.WelcomeActivity;
 import com.shui.nasor.View.Zhihu.Activity.SectionDetailActivity;
@@ -30,4 +31,5 @@ public interface ActivityComponent {
     void Inject (ThemeDetailActivity themeDetailActivity);
     void Inject(SectionDetailActivity sectionDetailActivity);
     void Inject(WeatherActivity weatherActivity);
+    void Inject(UserInfoActivity userInfoActivity);
 }

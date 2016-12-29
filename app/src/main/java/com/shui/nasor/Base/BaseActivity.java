@@ -11,6 +11,7 @@ import com.shui.nasor.APP.App;
 import com.shui.nasor.Injection.Component.ActivityComponent;
 import com.shui.nasor.Injection.Component.DaggerActivityComponent;
 import com.shui.nasor.Injection.Module.ActivityModule;
+import com.shui.nasor.View.viewHelper.ViewHelperController;
 
 import javax.inject.Inject;
 
@@ -32,7 +33,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends SupportActiv
     protected T mPresenter;
     protected Unbinder mBinder;
     protected Activity mContext;
-
+    private ViewHelperController mViewHelperController;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

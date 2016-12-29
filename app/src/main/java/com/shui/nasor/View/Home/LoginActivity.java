@@ -1,5 +1,6 @@
 package com.shui.nasor.View.Home;
 
+import android.content.Intent;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
@@ -14,15 +15,19 @@ import android.widget.RelativeLayout;
 
 import com.shui.nasor.APP.App;
 import com.shui.nasor.APP.AppUtils;
+import com.shui.nasor.APP.Constants;
 import com.shui.nasor.Base.BaseNormalActivity;
+import com.shui.nasor.Model.Bean.MyData.BombUserEntity;
 import com.shui.nasor.R;
+import com.shui.nasor.Utils.SharedPreferenceUtils;
+import com.shui.nasor.Utils.SnackBarUtils;
 
-import java.util.HashMap;
+import java.util.List;
 
 import butterknife.BindView;
-import cn.smssdk.EventHandler;
-import cn.smssdk.SMSSDK;
-import cn.smssdk.gui.RegisterPage;
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
 
 /**
  * 作者： max_Shui on 2016/12/21.
@@ -111,30 +116,48 @@ public class LoginActivity extends BaseNormalActivity implements View.OnFocusCha
     }
 
     @Override
-    public void onClick(View view) {
+    public void onClick(final View view) {
         switch (view.getId())
         {
             case R.id.sign_in_button:
-                signInButton.setBackgroundColor(AppUtils.getColor(R.color.colorNormal));
-                break;
-            case R.id.register_button:
-                //打开注册页面
-                RegisterPage registerPage = new RegisterPage();
-                registerPage.setRegisterCallback(new EventHandler() {
-                    public void afterEvent(int event, int result, Object data) {
-// 解析注册结果
-                        if (result == SMSSDK.RESULT_COMPLETE) {
-                            @SuppressWarnings("unchecked")
-                            HashMap<String,Object> phoneMap = (HashMap<String, Object>) data;
-                            String country = (String) phoneMap.get("country");
-                            String phone = (String) phoneMap.get("phone");
-
-// 提交用户信息（此方法可以不调用）
-                           //registerUser(country, phone);
+                //signInButton.setBackgroundColor(AppUtils.getColor(R.color.colorNormal));
+                String Phone=actvUsername.getText().toString().trim();//号码
+                final String PassWord=editPassword.getText().toString().trim();//密码
+                BmobQuery<BombUserEntity> query=new BmobQuery<>();
+                query.addWhereEqualTo("phone",Phone);
+                query.findObjects(new FindListener<BombUserEntity>() {
+                    @Override
+                    public void done(List<BombUserEntity> list, BmobException e) {
+                        if (list.size()>0)
+                        {
+                            for (BombUserEntity info:list)
+                            {
+                                if (info.getPassWord()==PassWord||info.getPassWord().equals(PassWord))
+                                {
+                                    System.out.println("登录成功");
+                                    SharedPreferenceUtils.setUser(info.getObjectId());
+                                    Intent intent=getIntent();
+                                    intent.setClass(LoginActivity.this,HomeActivity.class);
+                                    intent.putExtra("name",info.getName());
+                                    setResult(Constants.ACTIVITY_RESULT,intent);
+                                    LoginActivity.this.finishAfterTransition();
+                                }
+                                else
+                                {
+                                    SnackBarUtils.showShort(view,"密码错了，再想想吧~~");
+                                }
+                            }
                         }
+                        else {
+                            SnackBarUtils.showShort(view,"没有这个账户");
+                        }
+
                     }
                 });
-                registerPage.show(LoginActivity.this);
+                break;
+            case R.id.register_button:
+                Intent intent=new Intent(LoginActivity.this,RegisterActivity.class);
+                startActivity(intent);
                 break;
         }
     }

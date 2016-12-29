@@ -16,6 +16,16 @@ public class UserInfo extends BmobObject {
     private String email;
     private String avatar;
     private String phone;
+    private String passWord;
+
+    public String getPassWord() {
+        return passWord;
+    }
+
+    public void setPassWord(String passWord) {
+        this.passWord = passWord;
+    }
+
     private String signature;
     private int level;
 

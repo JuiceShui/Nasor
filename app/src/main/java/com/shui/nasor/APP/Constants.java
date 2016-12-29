@@ -43,6 +43,11 @@ public class Constants {
     public static final String SP_CURRENT_ITEM = "current_item";
     public static  final String SP_POSITION="position";
     public  static  final String SP_USER_INFO="user_info";
+    public static final String SP_USER_ENTITY="user_entity";
     //--------------------shareView-----------------
     public static final String SHARE_VIEW = "shareView";
+
+    //-----------------activity constants----activity request code and result code
+    public static final int ACTIVITY_REQUEST = 11;
+    public static final int ACTIVITY_RESULT=21;
 }
