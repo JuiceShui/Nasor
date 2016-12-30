@@ -29,6 +29,7 @@ public class CommentPresenter extends BaseRxPresenter<CommentContract.View> impl
 
     @Override
     public void getData(int id,int kind) {
+        mView.showLoading();
         if (kind==0)
         {
             Subscription subscription=retrofitHelper.loadLongComment(id)
@@ -37,6 +38,12 @@ public class CommentPresenter extends BaseRxPresenter<CommentContract.View> impl
                         @Override
                         public void call(ZhihuCommentEntity entity) {
                             mView.showData(entity);
+                            mView.hiddenLoading();
+                        }
+                    }, new Action1<Throwable>() {
+                        @Override
+                        public void call(Throwable throwable) {
+                            mView.showError("出错了TOT");
                         }
                     });
             beSubscribe(subscription);
@@ -49,6 +56,12 @@ public class CommentPresenter extends BaseRxPresenter<CommentContract.View> impl
                         @Override
                         public void call(ZhihuCommentEntity entity) {
                             mView.showData(entity);
+                            mView.hiddenLoading();
+                        }
+                    }, new Action1<Throwable>() {
+                        @Override
+                        public void call(Throwable throwable) {
+                            mView.showError("TOT  出错了");
                         }
                     });
             beSubscribe(subscription);

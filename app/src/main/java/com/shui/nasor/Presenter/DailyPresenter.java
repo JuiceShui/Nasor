@@ -40,6 +40,7 @@ public class DailyPresenter extends BaseRxPresenter<DailyContract.View> implemen
 
     @Override
     public void getData() {
+        mView.showLoading();
         Subscription subscription=retrofitHelper.loadDaily()
                 .compose(RxHelper.<ZhihuDailyEntity>RxTransformer())
                 .map(new Func1<ZhihuDailyEntity, ZhihuDailyEntity>() {
@@ -59,6 +60,7 @@ public class DailyPresenter extends BaseRxPresenter<DailyContract.View> implemen
                                public void call(ZhihuDailyEntity entity) {
                                    mCount = entity.getTop_stories().size();
                                    mView.ShowContent(entity);
+                                   mView.hiddenLoading();
                                }
                            }
                         , new Action1<Throwable>() {

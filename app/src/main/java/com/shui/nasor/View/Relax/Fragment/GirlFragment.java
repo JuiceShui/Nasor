@@ -41,6 +41,12 @@ public class GirlFragment extends BaseFragment<GirlPresenter> implements GirlCon
     StaggeredGridLayoutManager mStaggeredGridLayoutManager;
     private static final int SPAN_COUNT = 2;//列数
     private List<GirlEntity.ShowapiResBodyBean.NewslistBean> mData=new ArrayList<>();
+
+    @Override
+    protected View getLoadingTargetView() {
+        return girlRecyclerView;
+    }
+
     @Override
     protected void InjectView() {
         getFragmentComponent().Inject(this);

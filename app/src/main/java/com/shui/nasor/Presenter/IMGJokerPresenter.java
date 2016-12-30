@@ -31,12 +31,19 @@ public class IMGJokerPresenter extends BaseRxPresenter<IMGJokerContract.View> im
 
     @Override
     public void getData() {
+        mView.showLoading();
         Subscription subscription=retrofitHelper.loadIMGJoker(page,maxSize)
                 .compose(RxHelper.<IMGJokerEntity>RxTransformer())
                 .subscribe(new Action1<IMGJokerEntity>() {
                     @Override
                     public void call(IMGJokerEntity entity) {
                         mView.showData(entity);
+                        mView.hiddenLoading();
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        mView.showError("什么鬼！加载不出来");
                     }
                 });
         beSubscribe(subscription);
@@ -44,6 +51,7 @@ public class IMGJokerPresenter extends BaseRxPresenter<IMGJokerContract.View> im
 
     @Override
     public void getNextData() {
+        mView.showLoading();
         page++;
         Subscription subscription=retrofitHelper.loadIMGJoker(page,maxSize)
                 .compose(RxHelper.<IMGJokerEntity>RxTransformer())
@@ -51,6 +59,12 @@ public class IMGJokerPresenter extends BaseRxPresenter<IMGJokerContract.View> im
                     @Override
                     public void call(IMGJokerEntity entity) {
                         mView.showNextPage(entity);
+                        mView.hiddenLoading();
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        mView.showError("加载失败了。。");
                     }
                 });
         beSubscribe(subscription);
@@ -64,6 +78,7 @@ public class IMGJokerPresenter extends BaseRxPresenter<IMGJokerContract.View> im
         }
         else
         {
+            mView.showLoading();
             page--;
             Subscription subscription=retrofitHelper.loadIMGJoker(page,maxSize)
                     .compose(RxHelper.<IMGJokerEntity>RxTransformer())
@@ -71,6 +86,12 @@ public class IMGJokerPresenter extends BaseRxPresenter<IMGJokerContract.View> im
                         @Override
                         public void call(IMGJokerEntity entity) {
                             mView.showPrePage(entity);
+                            mView.hiddenLoading();
+                        }
+                    }, new Action1<Throwable>() {
+                        @Override
+                        public void call(Throwable throwable) {
+                            mView.showError("出错了、、");
                         }
                     });
             beSubscribe(subscription);

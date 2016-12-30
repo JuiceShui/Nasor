@@ -38,6 +38,17 @@ public interface NewsApi {
                                    @Query("title") String title, @Query("page") int page);
 
     /**
+     * 获取最新新闻
+     * @param appid
+     * @param appScript
+     * @param page
+     * @return
+     */
+    @GET("109-35")
+    Observable<NewsEntity> getLastedNews(@Query("showapi_appid") String appid, @Query("showapi_sign") String appScript,
+                                    @Query("page") int page);
+
+    /**
      * 获取笑话
      * @param appid
      * @param appScript

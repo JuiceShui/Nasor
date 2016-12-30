@@ -145,13 +145,6 @@ public class DailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public int getItemCount() {
         return mStoriesBeanList.size();
     }
-    public void changeTopViewPager(int position)
-    {
-        if (topViewPager!=null)
-        {
-            topViewPager.setCurrentItem(position);
-        }
-    }
     public void setOnItemClickListener(onItemClickListener listener)
     {
         this.mListener=listener;

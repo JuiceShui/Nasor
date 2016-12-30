@@ -12,4 +12,8 @@ package com.shui.nasor.Base;
 public interface BaseView {
     void showError(String msg);
     void isNightMode(boolean isNight);
+    void showLoading();
+    void hiddenLoading();
+    void showExceotion(String msg);
+    void showNetError(String msg);
 }

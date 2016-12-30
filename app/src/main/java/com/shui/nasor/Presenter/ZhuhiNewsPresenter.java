@@ -36,6 +36,7 @@ public class ZhuhiNewsPresenter extends BaseRxPresenter<ZhihuNewsContract.View> 
 
     @Override
     public void getData(int id) {
+        mView.showLoading();
         Subscription subscription=
         retrofitHelper.loadNewsDetail(id)
                 .compose(RxHelper.<ZhihuDetailEntity>RxTransformer())
@@ -44,6 +45,7 @@ public class ZhuhiNewsPresenter extends BaseRxPresenter<ZhihuNewsContract.View> 
                     public void call(ZhihuDetailEntity entity) {
                         mData=entity;
                         mView.showContent(entity);
+                        mView.hiddenLoading();
                     }
                 }, new Action1<Throwable>() {
                     @Override

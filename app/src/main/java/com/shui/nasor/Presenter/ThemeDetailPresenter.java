@@ -35,6 +35,7 @@ public class ThemeDetailPresenter extends BaseRxPresenter<ThemeDetailContract.Vi
 
     @Override
     public void getData(int id) {
+        mView.showLoading();
         Subscription subscription=retrofitHelper.loadThemeDetail(id)
                 .compose(RxHelper.<ZhihuThemeDetailEntity>RxTransformer())
                 .map(new Func1<ZhihuThemeDetailEntity, ZhihuThemeDetailEntity>() {
@@ -52,6 +53,7 @@ public class ThemeDetailPresenter extends BaseRxPresenter<ThemeDetailContract.Vi
                     @Override
                     public void call(ZhihuThemeDetailEntity entity) {
                         mView.showContent(entity);
+                        mView.hiddenLoading();
                     }
                 }, new Action1<Throwable>() {
                     @Override
@@ -59,6 +61,7 @@ public class ThemeDetailPresenter extends BaseRxPresenter<ThemeDetailContract.Vi
                         mView.showError("");
                     }
                 });
+        beSubscribe(subscription);
     }
 
     @Override

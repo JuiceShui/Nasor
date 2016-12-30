@@ -57,4 +57,9 @@
     <!--ThemeActivity-->
     <dimen name="theme_title_margin_start">48dp</dimen>
     <dimen name="theme_title_margin_end">64dp</dimen>
+
+    <!--news dimen-->
+    <dimen name="news_image_width">100dp</dimen>
+    <dimen name="news_image_height">60dp</dimen>
+    <dimen name="news_content_height">100dp</dimen>
 </resources>

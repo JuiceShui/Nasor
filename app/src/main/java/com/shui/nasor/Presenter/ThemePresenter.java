@@ -29,12 +29,14 @@ public class ThemePresenter extends BaseRxPresenter<ThemeContract.View> implemen
 
     @Override
     public void getData() {
+        mView.showLoading();
         Subscription subscription=retrofitHelper.loadThemeList()
                 .compose(RxHelper.<ZhihuThemeListEntity>RxTransformer())
                 .subscribe(new Action1<ZhihuThemeListEntity>() {
                     @Override
                     public void call(ZhihuThemeListEntity entity) {
                         mView.showContent(entity);
+                        mView.hiddenLoading();
                     }
                 }, new Action1<Throwable>() {
                     @Override
@@ -42,5 +44,6 @@ public class ThemePresenter extends BaseRxPresenter<ThemeContract.View> implemen
                         mView.showError("");
                     }
                 });
+        beSubscribe(subscription);
     }
 }

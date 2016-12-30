@@ -34,6 +34,11 @@ public class CommentFragment extends BaseFragment<CommentPresenter> implements C
     List<ZhihuCommentEntity.CommentsBean> mList;
 
     @Override
+    protected View getLoadingTargetView() {
+        return rvCommentList;
+    }
+
+    @Override
     protected void InjectView() {
         getFragmentComponent().Inject(this);
     }

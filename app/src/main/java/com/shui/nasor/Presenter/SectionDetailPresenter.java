@@ -35,6 +35,7 @@ public class SectionDetailPresenter extends BaseRxPresenter<SectionDetailContrac
 
     @Override
     public void getData(int id) {
+        mView.showLoading();
         Subscription subscription = retrofitHelper.loadSectionDetail(id)
                 .compose(RxHelper.<ZhihuSectionDetailEntity>RxTransformer())
                 .map(new Func1<ZhihuSectionDetailEntity, ZhihuSectionDetailEntity>() {
@@ -52,6 +53,7 @@ public class SectionDetailPresenter extends BaseRxPresenter<SectionDetailContrac
                     @Override
                     public void call(ZhihuSectionDetailEntity entity) {
                         mView.showData(entity);
+                        mView.hiddenLoading();
                     }
                 }, new Action1<Throwable>() {
                     @Override

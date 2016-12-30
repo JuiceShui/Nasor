@@ -38,6 +38,12 @@ public class IMGJokerFragment extends BaseFragment<IMGJokerPresenter> implements
     SwipeRefreshLayout imgJokerSwipeLayout;
     private IMGJokerAdapter mAdapter;
     private List<IMGJokerEntity.ShowapiResBodyBean.ContentlistBean> mData=new ArrayList<>();
+
+    @Override
+    protected View getLoadingTargetView() {
+        return imgJokerRecyclerView;
+    }
+
     @Override
     protected void InjectView() {
         getFragmentComponent().Inject(this);

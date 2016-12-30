@@ -31,6 +31,7 @@ public class GirlPresenter extends BaseRxPresenter<GirlContract.View> implements
 
     @Override
     public void getData() {
+        mView.showLoading();
         page=1;
         Subscription subscription=retrofitHelper.loadGirl(page,size)
                 .compose(RxHelper.<GirlEntity>RxTransformer())
@@ -38,6 +39,12 @@ public class GirlPresenter extends BaseRxPresenter<GirlContract.View> implements
                     @Override
                     public void call(GirlEntity entity) {
                         mView.showData(entity);
+                        mView.hiddenLoading();
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        mView.showError("咦~好像出问题了");
                     }
                 });
         beSubscribe(subscription);
@@ -52,6 +59,11 @@ public class GirlPresenter extends BaseRxPresenter<GirlContract.View> implements
                     @Override
                     public void call(GirlEntity entity) {
                         mView.showMore(entity);
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        mView.showError("貌似有问题。。。");
                     }
                 });
         beSubscribe(subscription);

@@ -33,6 +33,7 @@ public class WechatPresenter extends BaseRxPresenter<WeChatContract.View> implem
 
     @Override
     public void getData() {
+        mView.showLoading();
         this.word="";
         this.page=1;
         Subscription subscription=retrofitHelper.loadWeChat(20,page)
@@ -41,6 +42,7 @@ public class WechatPresenter extends BaseRxPresenter<WeChatContract.View> implem
                     @Override
                     public void call(WeChatEntity entity) {
                         mView.showContent(entity);
+                        mView.hiddenLoading();
                     }
                 }, new Action1<Throwable>() {
                     @Override
@@ -90,6 +92,7 @@ public class WechatPresenter extends BaseRxPresenter<WeChatContract.View> implem
 
     @Override
     public void getSearch(String word) {
+        mView.showLoading();
         this.page=1;
         this.word=word;
         Subscription subscription=retrofitHelper.loadWeChatSearch(20,page,word)
@@ -98,6 +101,7 @@ public class WechatPresenter extends BaseRxPresenter<WeChatContract.View> implem
                     @Override
                     public void call(WeChatEntity entity) {
                         mView.showSearch(entity);
+                        mView.hiddenLoading();
                     }
                 }, new Action1<Throwable>() {
                     @Override

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.shui.nasor.Base.BaseFragment;
 import com.shui.nasor.Model.Bean.Zhihu.ZhihuSectionListEntity;
@@ -38,6 +39,12 @@ public class SectionFragment extends BaseFragment<SectionPresenter> implements S
     private SpacesItemDecoration spacesItemDecoration;
     private SectionAdapter mAdapter;
     private List<ZhihuSectionListEntity.DataBean> mData=new ArrayList<>();
+
+    @Override
+    protected View getLoadingTargetView() {
+        return sectionRecyclerView;
+    }
+
     @Override
     protected void InjectView() {
         getFragmentComponent().Inject(this);

@@ -42,6 +42,12 @@ public class WeChatFragment extends BaseFragment<WechatPresenter> implements WeC
     private SpacesItemDecoration spacesItemDecoration;
     private List<WeChatEntity.NewslistBean> mData=new ArrayList<>();
     private boolean isLastItem=false;//是否下滑到了底部
+
+    @Override
+    protected View getLoadingTargetView() {
+        return wechatRecyclerView;
+    }
+
     @Override
     protected void InjectView() {
         getFragmentComponent().Inject(this);
@@ -75,7 +81,6 @@ public class WeChatFragment extends BaseFragment<WechatPresenter> implements WeC
         });
         mPresenter.getData();
     }
-
     @Override
     protected int getLayout() {
         return R.layout.fragment_wechat;

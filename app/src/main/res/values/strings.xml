@@ -96,4 +96,7 @@
 
     <!--user-->
     <string name="user_no_data">╮(╯3╰)╭再怎么找也没有啦~~</string>
+
+    <!--news -->
+    <string name="news_action_share">分享</string>
 </resources>

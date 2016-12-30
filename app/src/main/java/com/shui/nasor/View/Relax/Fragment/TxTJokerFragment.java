@@ -3,6 +3,7 @@ package com.shui.nasor.View.Relax.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.shui.nasor.Base.BaseFragment;
 import com.shui.nasor.Model.Bean.Relax.TXTJokerEntity;
@@ -35,6 +36,12 @@ public class TxTJokerFragment extends BaseFragment<TXTJokerPresenter> implements
     private TXTJokerAdapter mAdapter;
     private boolean isLastItemVisible=false;
     private List<TXTJokerEntity.ShowapiResBodyBean.ContentlistBean> mData=new ArrayList<>();
+
+    @Override
+    protected View getLoadingTargetView() {
+        return txtJokerRecyclerView;
+    }
+
     @Override
     protected void InjectView() {
         getFragmentComponent().Inject(this);

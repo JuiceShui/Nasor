@@ -29,12 +29,14 @@ public class SectionPresenter extends BaseRxPresenter<SectionContract.View> impl
 
     @Override
     public void getData() {
+        mView.showLoading();
         Subscription subscription=retrofitHelper.loadSectionList()
                 .compose(RxHelper.<ZhihuSectionListEntity>RxTransformer())
                 .subscribe(new Action1<ZhihuSectionListEntity>() {
                     @Override
                     public void call(ZhihuSectionListEntity entity) {
                         mView.showContent(entity);
+                        mView.hiddenLoading();
                     }
                 }, new Action1<Throwable>() {
                     @Override

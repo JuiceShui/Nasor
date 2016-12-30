@@ -5,6 +5,7 @@ import android.app.Activity;
 import com.shui.nasor.Injection.FragmentScope;
 import com.shui.nasor.Injection.Module.FragmentModule;
 import com.shui.nasor.View.Like.Fragment.LikeFragment;
+import com.shui.nasor.View.News.Fragment.NewsFragment;
 import com.shui.nasor.View.Relax.Fragment.GirlFragment;
 import com.shui.nasor.View.Relax.Fragment.IMGJokerFragment;
 import com.shui.nasor.View.Relax.Fragment.RelaxMainFragment;
@@ -44,4 +45,5 @@ public interface FragmentComponent {
     void Inject(TxTJokerFragment txTJokerFragment);
     void Inject(IMGJokerFragment imgJokerFragment);
     void Inject(GirlFragment girlFragment);
+    void Inject(NewsFragment newsFragment);
 }

@@ -232,6 +232,10 @@ public class RetrofitHelper {
 
 
     //**************************易源 新闻 笑话api***************************
+    public Observable<NewsEntity> loadLastedNews(int page)
+    {
+        return newsApi.getLastedNews(NewsApi.APPID,NewsApi.APPSCRIT,page);
+    }
     public Observable<NewsEntity> loadNews(String title, int page)
     {
         return newsApi.getNews(NewsApi.APPID,NewsApi.APPSCRIT,title,page);

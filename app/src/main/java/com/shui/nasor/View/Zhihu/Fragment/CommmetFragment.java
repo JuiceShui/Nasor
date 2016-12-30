@@ -4,9 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.shui.nasor.Base.BaseFragment;
 import com.shui.nasor.Model.Bean.Zhihu.ZhihuCommentEntity;
@@ -19,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * 作者： max_Shui on 2016/12/14.
@@ -52,6 +49,11 @@ public class CommmetFragment extends BaseFragment<CommentPresenter> implements C
         Bundle bundle = getArguments();
         this.id = bundle.getInt("id");
         this.kind = bundle.getInt("kind");
+    }
+
+    @Override
+    protected View getLoadingTargetView() {
+        return commentRecyclerView;
     }
 
     @Override
@@ -89,11 +91,4 @@ public class CommmetFragment extends BaseFragment<CommentPresenter> implements C
 
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        ButterKnife.bind(this, rootView);
-        return rootView;
-    }
 }

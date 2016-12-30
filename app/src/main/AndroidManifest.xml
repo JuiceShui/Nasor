@@ -82,6 +82,7 @@
             android:theme="@style/AppTheme"/>
         <activity android:name=".View.Home.UserNameModifyActivity" />
         <activity android:name=".View.Home.UserModifySignActivity" />
+        <activity android:name=".View.News.Activity.NewsDetailActivity" />
     </application>
 
 </manifest>

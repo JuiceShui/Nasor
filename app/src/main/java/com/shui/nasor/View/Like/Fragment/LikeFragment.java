@@ -3,6 +3,7 @@ package com.shui.nasor.View.Like.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.view.View;
 
 import com.shui.nasor.Base.BaseFragment;
 import com.shui.nasor.Model.RealmBean.LikeBean;
@@ -37,6 +38,12 @@ public class LikeFragment extends BaseFragment<LikePresenter> implements LikeCon
     private SpacesItemDecoration spacesItemDecoration;
     private boolean isFirst=true;
     private RecyclerViewItemTouchHelper mItemTouchHelper;
+
+    @Override
+    protected View getLoadingTargetView() {
+        return likeRecyclerView;
+    }
+
     @Override
     protected void InjectView() {
         getFragmentComponent().Inject(this);

@@ -41,6 +41,12 @@ public class HotFragment extends BaseFragment<HotPresenter> implements HotContra
     private List<ZhihuHotEntity.RecentBean> mData=new ArrayList<>();
     private SpacesItemDecoration spacesItemDecoration;
     private HotAdapter mAdapter;
+
+    @Override
+    protected View getLoadingTargetView() {
+        return hotRecyclerView;
+    }
+
     @Override
     protected void InjectView() {
         getFragmentComponent().Inject(this);

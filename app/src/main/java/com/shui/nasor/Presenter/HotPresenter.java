@@ -24,7 +24,7 @@ import rx.functions.Func1;
  */
 
 
-        public class HotPresenter extends BaseRxPresenter<HotContract.View> implements HotContract.Presenter {
+public class HotPresenter extends BaseRxPresenter<HotContract.View> implements HotContract.Presenter {
     private RetrofitHelper retrofitHelper;
     private RealmHelper realmHelper;
     @Inject
@@ -35,6 +35,7 @@ import rx.functions.Func1;
 
     @Override
     public void getData() {
+        mView.showLoading();
         Subscription subscription=retrofitHelper.loadHotList()
                 .compose(RxHelper.<ZhihuHotEntity>RxTransformer())
                 .map(new Func1<ZhihuHotEntity, ZhihuHotEntity>() {
@@ -53,11 +54,12 @@ import rx.functions.Func1;
                     @Override
                     public void call(ZhihuHotEntity zhihuHotEntity) {
                         mView.showContent(zhihuHotEntity);
+                        mView.hiddenLoading();
                     }
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-                        mView.showError("");
+                        mView.showError("yoyo~~出问题了。。。");
                     }
                 });
         beSubscribe(subscription);

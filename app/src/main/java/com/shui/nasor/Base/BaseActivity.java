@@ -92,11 +92,6 @@ public abstract class BaseActivity<T extends BasePresenter> extends SupportActiv
     }
 
     @Override
-    public void showError(String msg) {
-
-    }
-
-    @Override
     public void isNightMode(boolean isNight) {
     if (isNight)
      {
@@ -109,5 +104,30 @@ public abstract class BaseActivity<T extends BasePresenter> extends SupportActiv
                 (AppCompatDelegate.MODE_NIGHT_NO);
      }
         recreate();
+    }
+
+    @Override
+    public void showError(String msg) {
+
+    }
+
+    @Override
+    public void showExceotion(String msg) {
+
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void showNetError(String msg) {
+
+    }
+
+    @Override
+    public void hiddenLoading() {
+
     }
 }

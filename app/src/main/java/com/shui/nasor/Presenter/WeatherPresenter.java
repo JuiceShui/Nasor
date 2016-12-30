@@ -73,17 +73,19 @@ public class WeatherPresenter extends BaseRxPresenter<WeatherContract.View> impl
     }
     @Override
     public void getWeather(String district) {
+        mView.showLoading();
            Subscription subscription= retrofitHelper.loadWeather(district)
                     .compose(RxHelper.<WeatherEntity>RxTransformer())
                     .subscribe(new Action1<WeatherEntity>() {
                         @Override
                         public void call(WeatherEntity weatherEntity) {
                            mView.ShowWeather(weatherEntity);
+                            mView.hiddenLoading();
                         }
                     }, new Action1<Throwable>() {
                         @Override
                         public void call(Throwable throwable) {
-                            System.out.println("ccccccccc"+throwable.toString());
+                          mView.showError(throwable.toString());
                         }
                     });
         beSubscribe(subscription);

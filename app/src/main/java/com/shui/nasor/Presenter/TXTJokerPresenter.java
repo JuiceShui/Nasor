@@ -30,6 +30,7 @@ public class TXTJokerPresenter extends BaseRxPresenter<TXTJokerContract.View> im
 
     @Override
     public void getData() {
+        mView.showLoading();
         page=1;
         Subscription subscription=retrofitHelper.loadTXTJoker(page)
                 .compose(RxHelper.<TXTJokerEntity>RxTransformer())
@@ -37,6 +38,7 @@ public class TXTJokerPresenter extends BaseRxPresenter<TXTJokerContract.View> im
                     @Override
                     public void call(TXTJokerEntity entity) {
                         mView.showData(entity);
+                        mView.hiddenLoading();
                     }
                 }, new Action1<Throwable>() {
                     @Override

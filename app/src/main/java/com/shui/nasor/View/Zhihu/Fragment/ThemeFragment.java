@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.shui.nasor.Base.BaseFragment;
 import com.shui.nasor.Model.Bean.Zhihu.ZhihuThemeListEntity;
@@ -38,6 +39,12 @@ public class ThemeFragment extends BaseFragment<ThemePresenter> implements Theme
     private List<ZhihuThemeListEntity.OthersBean> mData=new ArrayList<>();
     private ThemeAdapter mAdapter;
     SpacesItemDecoration spacesItemDecoration;
+
+    @Override
+    protected View getLoadingTargetView() {
+        return themeRecyclerView;
+    }
+
     @Override
     protected void InjectView() {
         getFragmentComponent().Inject(this);

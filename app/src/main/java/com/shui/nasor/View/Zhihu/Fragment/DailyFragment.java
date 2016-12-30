@@ -48,6 +48,12 @@ public class DailyFragment extends BaseFragment<DailyPresenter> implements Daily
     private List<ZhihuDailyEntity.StoriesBean> mData=new ArrayList<>();
     private List<ZhihuDailyEntity.TopStoriesBean> mTopData=new ArrayList<>();
     private SpacesItemDecoration spacesItemDecoration;
+
+    @Override
+    protected View getLoadingTargetView() {
+        return dailyRecyclerView;
+    }
+
     @Override
     protected void InjectView() {
         getFragmentComponent().Inject(this);

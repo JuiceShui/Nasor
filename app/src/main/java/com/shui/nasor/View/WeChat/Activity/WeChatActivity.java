@@ -12,6 +12,7 @@ import com.shui.nasor.DB.RealmHelper;
 import com.shui.nasor.Model.RealmBean.LikeBean;
 import com.shui.nasor.Model.RealmBean.LikeType;
 import com.shui.nasor.R;
+import com.shui.nasor.View.viewHelper.ViewHelperController;
 import com.tencent.smtt.sdk.WebChromeClient;
 import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebView;
@@ -40,8 +41,11 @@ public class WeChatActivity extends BaseNormalActivity {
     private String link;
     private MenuItem menuItem;
     private boolean isLiked;//是否标注为喜欢
+    private ViewHelperController controller;
+    private boolean isShowLoading=false;
     @Override
     protected void initEventAndData() {
+        controller=new ViewHelperController(weChatWebView);
         realmHelper= App.getAppComponent().realmHelper();
         intent=getIntent();
         id=intent.getStringExtra("id");
@@ -66,9 +70,17 @@ public class WeChatActivity extends BaseNormalActivity {
             @Override
             public void onProgressChanged(WebView webView, int i) {
                 super.onProgressChanged(webView, i);
+                if (i<100)
+                {
+                    if (!isShowLoading)
+                    {
+                        showLoading();
+                        isShowLoading=true;
+                    }
+                }
                 if (i==100)//加载完成
                 {
-
+                        hiddenLoading();
                 }
             }
 
@@ -153,4 +165,23 @@ public class WeChatActivity extends BaseNormalActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
+    private void toggleShowLoading(boolean toggle, String msg) {
+        if (null == controller) {
+            throw new IllegalArgumentException("You must return a right target view for loading");
+        }
+
+        if (toggle) {
+            controller.showLoading(msg);
+        } else {
+            controller.restore();
+        }
+    }
+    private void showLoading() {
+        toggleShowLoading(true,null);
+    }
+
+    private void hiddenLoading() {
+        toggleShowLoading(false,null);
+    }
+
 }
