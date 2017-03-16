@@ -30,19 +30,24 @@ public class IMGJokerPresenter extends BaseRxPresenter<IMGJokerContract.View> im
     }
 
     @Override
-    public void getData() {
-        mView.showLoading();
+    public void getData(final boolean isFirst) {
+        if (isFirst) {
+            mView.showLoading();
+        }
         Subscription subscription=retrofitHelper.loadIMGJoker(page,maxSize)
                 .compose(RxHelper.<IMGJokerEntity>RxTransformer())
                 .subscribe(new Action1<IMGJokerEntity>() {
                     @Override
                     public void call(IMGJokerEntity entity) {
                         mView.showData(entity);
-                        mView.hiddenLoading();
+                        if (isFirst) {
+                            mView.hiddenLoading();
+                        }
                     }
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
+                        if (isFirst){mView.hiddenLoading();}
                         mView.showError("什么鬼！加载不出来");
                     }
                 });

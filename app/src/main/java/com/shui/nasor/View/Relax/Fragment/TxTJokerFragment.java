@@ -71,7 +71,7 @@ public class TxTJokerFragment extends BaseFragment<TXTJokerPresenter> implements
                 isLastItemVisible=isBottom(recyclerView);
             }
         });
-        mPresenter.getData();
+        mPresenter.getData(true);
     }
 
     @Override
@@ -110,7 +110,7 @@ public class TxTJokerFragment extends BaseFragment<TXTJokerPresenter> implements
 
     @Override
     public void onRefresh() {
-        mPresenter.getData();
+        mPresenter.getData(false);
     }
     private boolean isBottom(RecyclerView view)
     {

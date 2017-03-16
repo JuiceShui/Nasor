@@ -1,5 +1,6 @@
 package com.shui.nasor.View.Home;
 
+import android.content.Intent;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
@@ -112,6 +113,10 @@ public class RegisterActivity extends BaseNormalActivity implements View.OnClick
                             public void done(String s, BmobException e) {
                                 if(e==null){
                                     System.out.println("创建成功");
+                                    Intent intent=new Intent(RegisterActivity.this,LoginActivity.class);
+                                    RegisterActivity.this.startActivity(intent);
+                                    finish();
+                                    //overridePendingTransition(R.anim.activity_in_anim_transion_horzita_left,R.anim.activity_out_anim_transion_horzital_left);
                                 }else{
                                     System.out.println("创建数据失败：" + e.getMessage());
                                 }

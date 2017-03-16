@@ -8,7 +8,8 @@ import com.shui.nasor.Model.Bean.News.NewsEntity;
 import com.shui.nasor.Model.Bean.Relax.GirlEntity;
 import com.shui.nasor.Model.Bean.Relax.IMGJokerEntity;
 import com.shui.nasor.Model.Bean.Relax.TXTJokerEntity;
-import com.shui.nasor.Model.Bean.WeChat.WeChatEntity;
+import com.shui.nasor.Model.Bean.TXData.TXNews;
+import com.shui.nasor.Model.Bean.WeChat.WXEntity;
 import com.shui.nasor.Model.Bean.Weather.WeatherEntity;
 import com.shui.nasor.Model.Bean.Zhihu.ZhihuCommentEntity;
 import com.shui.nasor.Model.Bean.Zhihu.ZhihuDailyEntity;
@@ -51,12 +52,14 @@ public class RetrofitHelper {
     private static ZhihuApi zhihuApi=null;
     private static NewsApi newsApi;
     private static WeChatApi weChatApi;
+    private static TXNewsApi txNewsApi=null;
     private void init()
     {
         initOkHttp();
         zhihuApi=getZhihuApi();
         newsApi=getNewsApi();
         weChatApi=getWeChatApi();
+        txNewsApi=getTXNewsApi();
     }
 
     public RetrofitHelper() {
@@ -220,13 +223,13 @@ public class RetrofitHelper {
 
 
     //**********************微信api***********************
-    public Observable<WeChatEntity> loadWeChatSearch(int num, int page, String word)
+    public Observable<WXEntity> getWXInfo(int page)
     {
-        return weChatApi.getWeChatSearch(num,page,word);
+        return weChatApi.getWXInfo(WeChatApi.APIKEY,WeChatApi.SigleCount,page);
     }
-    public Observable<WeChatEntity> loadWeChat(int num,int page)
+    public Observable<WXEntity> getWXInfo(int page,String word)
     {
-        return weChatApi.getWeChatInfo(num,page);
+        return weChatApi.getWXInfoSearch(WeChatApi.APIKEY,WeChatApi.SigleCount,page,word);
     }
     //*************************************************************
 
@@ -259,4 +262,118 @@ public class RetrofitHelper {
         return newsApi.getWeather(NewsApi.APPID,NewsApi.APPSCRIT,area);
     }
     //***********************************************************
+    /**
+     * 天行api
+     * @return
+     */
+    private static TXNewsApi getTXNewsApi()
+    {
+        Retrofit TXNewsRetrofit=new Retrofit.Builder()
+                .baseUrl(TXNewsApi.HostLink)
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+        return TXNewsRetrofit.create(TXNewsApi.class);
+    }
+    //-----------------------天行API----------------------------------------------
+    //--国内
+    public Observable<TXNews> getHomeNews(int page)
+    {
+        return txNewsApi.TXHomeNews(TXNewsApi.APIKEY,TXNewsApi.SigleCount,page);
+    }
+    public Observable<TXNews> getHomeNews(int page,String word)
+    {
+        return txNewsApi.TXHomeNewsWord(TXNewsApi.APIKEY,TXNewsApi.SigleCount,page,word);
+    }
+    //--娱乐
+    public Observable<TXNews> getEntertainmentNews(int page)
+    {
+        return txNewsApi.TXEntertainmentNews(TXNewsApi.APIKEY,TXNewsApi.SigleCount,page);
+    }
+    public Observable<TXNews> getEntertainmentNews(int page,String word)
+    {
+        return txNewsApi.TXEntertainmentNewsWord(TXNewsApi.APIKEY,TXNewsApi.SigleCount,page,word);
+    }
+    //--足球
+    public Observable<TXNews> getFootballNews(int page)
+    {
+        return txNewsApi.TXFootballNews(TXNewsApi.APIKEY,TXNewsApi.SigleCount,page);
+    }
+    public Observable<TXNews> getFootballNews(int page,String word)
+    {
+        return txNewsApi.TXFootballNewsWord(TXNewsApi.APIKEY,TXNewsApi.SigleCount,page,word);
+    }
+    //--美女
+    public Observable<TXNews> getGirl(int page)
+    {
+        return txNewsApi.TXGirl(TXNewsApi.APIKEY,TXNewsApi.SigleCount,page);
+    }
+    public Observable<TXNews> getGirl(int page,String word)
+    {
+        return txNewsApi.TXGirlWord(TXNewsApi.APIKEY,TXNewsApi.SigleCount,page,word);
+    }
+    //--健康
+    public Observable<TXNews> getHealthNews(int page)
+    {
+        return txNewsApi.TXHealthNews(TXNewsApi.APIKEY,TXNewsApi.SigleCount,page);
+    }
+    public Observable<TXNews> getHealthNews(int page,String word)
+    {
+        return txNewsApi.TXHealthNewsWord(TXNewsApi.APIKEY,TXNewsApi.SigleCount,page,word);
+    }
+    //--it
+    public Observable<TXNews> getITNews(int page)
+    {
+        return txNewsApi.TXITNews(TXNewsApi.APIKEY,TXNewsApi.SigleCount,page);
+    }
+    public Observable<TXNews> getITNews(int page,String word)
+    {
+        return txNewsApi.TXITNewsWord(TXNewsApi.APIKEY,TXNewsApi.SigleCount,page,word);
+    }
+    //--NBA
+    public Observable<TXNews> getNBANews(int page)
+    {
+        return txNewsApi.TXNBANews(TXNewsApi.APIKEY,TXNewsApi.SigleCount,page);
+    }
+    public Observable<TXNews> getNBANews(int page,String word)
+    {
+        return txNewsApi.TXNBANewsWord(TXNewsApi.APIKEY,TXNewsApi.SigleCount,page,word);
+    }
+    //--sport
+    public Observable<TXNews> getSportNews(int page)
+    {
+        return txNewsApi.TXSportNews(TXNewsApi.APIKEY,TXNewsApi.SigleCount,page);
+    }
+    public Observable<TXNews> getSportNews(int page,String word)
+    {
+        return txNewsApi.TXSportNewsWord(TXNewsApi.APIKEY,TXNewsApi.SigleCount,page,word);
+    }
+    //--趣闻
+    public Observable<TXNews> getStrangeNews(int page)
+    {
+        return txNewsApi.TXStrangeNews(TXNewsApi.APIKEY,TXNewsApi.SigleCount,page);
+    }
+    public Observable<TXNews> getStrangeNews(int page, String word)
+    {
+        return txNewsApi.TXStrangeNewsWord(TXNewsApi.APIKEY,TXNewsApi.SigleCount,page,word);
+    }
+    //--旅游
+    public Observable<TXNews> getTravelNews(int page)
+    {
+        return txNewsApi.TXTravelNews(TXNewsApi.APIKEY,TXNewsApi.SigleCount,page);
+    }
+    public Observable<TXNews> getTravelNews(int page,String word)
+    {
+        return txNewsApi.TXTravelNewsWord(TXNewsApi.APIKEY,TXNewsApi.SigleCount,page,word);
+    }
+    //--国外
+    public Observable<TXNews> getWorldNews(int page)
+    {
+        return txNewsApi.TXWorldNews(TXNewsApi.APIKEY,TXNewsApi.SigleCount,page);
+    }
+    public Observable<TXNews> getWorldNews(int page,String word)
+    {
+        return txNewsApi.TXWorldNewsWord(TXNewsApi.APIKEY,TXNewsApi.SigleCount,page,word);
+    }
 }

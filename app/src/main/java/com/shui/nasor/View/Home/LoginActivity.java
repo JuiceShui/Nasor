@@ -137,6 +137,7 @@ public class LoginActivity extends BaseNormalActivity implements View.OnFocusCha
                                     System.out.println("登录成功");
                                     SharedPreferenceUtils.setUser(info.getObjectId());
                                     Intent intent=getIntent();
+                                    SharedPreferenceUtils.setUserLogin(true);
                                     intent.setClass(LoginActivity.this,HomeActivity.class);
                                     intent.putExtra("name",info.getName());
                                     setResult(Constants.ACTIVITY_RESULT,intent);

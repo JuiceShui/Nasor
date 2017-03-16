@@ -21,7 +21,7 @@ public interface DailyContract {
     }
     interface Presenter extends BasePresenter<View>
     {
-        void getData();
+        void getData(boolean isFirst);
         void startChange();
         void stopChange();
         void insertReadToDB(int id);

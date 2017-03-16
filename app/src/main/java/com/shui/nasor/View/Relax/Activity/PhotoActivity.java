@@ -28,7 +28,6 @@ import uk.co.senab.photoview.PhotoViewAttacher;
  * ( ゜- ゜)つロ  ( ゜- ゜)つロ  ( ゜- ゜)つロ  ( ゜- ゜)つロ
  */
 
-
 public class PhotoActivity extends BaseNormalActivity {
     @BindView(R.id.normal_toolbar)
     Toolbar normalToolbar;
@@ -60,9 +59,7 @@ public class PhotoActivity extends BaseNormalActivity {
                 }
             });
         }
-
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.photo_menu,menu);
@@ -70,7 +67,6 @@ public class PhotoActivity extends BaseNormalActivity {
         setLikeState(realmHelper.queryLike(id));
         return true;
     }
-
     @Override
     protected int getLayout() {
         return R.layout.activity_photo;
@@ -108,7 +104,6 @@ public class PhotoActivity extends BaseNormalActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
     private void setLikeState(boolean state) {
         if(state) {
             menuItem.setIcon(R.mipmap.ic_toolbar_like_p);
@@ -118,7 +113,6 @@ public class PhotoActivity extends BaseNormalActivity {
             isLiked = false;
         }
     }
-
     @Override
     public void onBackPressedSupport() {
         finishAfterTransition();

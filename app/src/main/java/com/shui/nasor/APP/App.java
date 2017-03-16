@@ -18,6 +18,7 @@ import java.util.Set;
 
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobConfig;
+import cn.sharesdk.framework.ShareSDK;
 import cn.smssdk.SMSSDK;
 
 /**
@@ -76,6 +77,7 @@ public class App extends Application {
 
         //初始化shareSDK
         SMSSDK.initSDK(this, "1a39fef440794", "764c21865adb620490ba489edb17bf11");
+        ShareSDK.initSDK(this,"1a1f6f16411c2");
     }
 
     public void addActivity(Activity act) {

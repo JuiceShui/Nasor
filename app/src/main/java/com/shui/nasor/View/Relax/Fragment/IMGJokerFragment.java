@@ -68,7 +68,7 @@ public class IMGJokerFragment extends BaseFragment<IMGJokerPresenter> implements
                 mPresenter.getPreData();
             }
         });
-        mPresenter.getData();
+        mPresenter.getData(true);
     }
 
     @Override
@@ -114,7 +114,7 @@ public class IMGJokerFragment extends BaseFragment<IMGJokerPresenter> implements
 
     @Override
     public void onRefresh() {
-        mPresenter.getData();
+        mPresenter.getData(false);
     }
 
     @Override

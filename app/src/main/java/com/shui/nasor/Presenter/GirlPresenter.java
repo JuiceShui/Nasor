@@ -30,8 +30,10 @@ public class GirlPresenter extends BaseRxPresenter<GirlContract.View> implements
     }
 
     @Override
-    public void getData() {
-        mView.showLoading();
+    public void getData(final boolean isFirst) {
+        if (isFirst) {
+            mView.showLoading();
+        }
         page=1;
         Subscription subscription=retrofitHelper.loadGirl(page,size)
                 .compose(RxHelper.<GirlEntity>RxTransformer())
@@ -39,11 +41,17 @@ public class GirlPresenter extends BaseRxPresenter<GirlContract.View> implements
                     @Override
                     public void call(GirlEntity entity) {
                         mView.showData(entity);
-                        mView.hiddenLoading();
+                        if (isFirst) {
+                            mView.hiddenLoading();
+                        }
                     }
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
+                        if (isFirst)
+                        {
+                            mView.hiddenLoading();
+                        }
                         mView.showError("咦~好像出问题了");
                     }
                 });

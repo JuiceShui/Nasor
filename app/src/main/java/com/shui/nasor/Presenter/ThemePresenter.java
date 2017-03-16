@@ -28,20 +28,24 @@ public class ThemePresenter extends BaseRxPresenter<ThemeContract.View> implemen
     }
 
     @Override
-    public void getData() {
-        mView.showLoading();
+    public void getData(final boolean isFirst) {
+        if (isFirst)
+        {
+        mView.showLoading();}
         Subscription subscription=retrofitHelper.loadThemeList()
                 .compose(RxHelper.<ZhihuThemeListEntity>RxTransformer())
                 .subscribe(new Action1<ZhihuThemeListEntity>() {
                     @Override
                     public void call(ZhihuThemeListEntity entity) {
                         mView.showContent(entity);
-                        mView.hiddenLoading();
+                        if (isFirst)
+                        {
+                        mView.hiddenLoading();}
                     }
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-                        mView.showError("");
+                        if (isFirst){mView.hiddenLoading();}mView.showError("");
                     }
                 });
         beSubscribe(subscription);

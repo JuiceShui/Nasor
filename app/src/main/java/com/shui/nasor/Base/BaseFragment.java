@@ -129,7 +129,6 @@ public abstract class BaseFragment<T extends BasePresenter> extends SupportFragm
         if (null == mViewHelperController) {
             throw new IllegalArgumentException("You must return a right target view for loading");
         }
-
         if (toggle) {
             mViewHelperController.showLoading(msg);
         } else {

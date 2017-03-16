@@ -81,7 +81,7 @@ public class ThemeDetailActivity extends BaseActivity<ThemeDetailPresenter> impl
                 }
             }
         });
-        mPresenter.getData(id);
+        mPresenter.getData(id,true);
     }
 
     @Override
@@ -107,7 +107,7 @@ public class ThemeDetailActivity extends BaseActivity<ThemeDetailPresenter> impl
 
     @Override
     public void onRefresh() {
-        mPresenter.getData(id);
+        mPresenter.getData(id,false);
     }
 
     @Override

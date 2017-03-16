@@ -22,7 +22,7 @@ public class HomeFragment extends BaseNormalFragment {
 
     @Override
     protected void initEventAndData() {
-        fragmentName.setText(getClass().getSimpleName());
+        fragmentName.setText("");
     }
 
     @Override

@@ -23,7 +23,7 @@ public class LikePresenter extends BaseRxPresenter<LikeContract.View> implements
     }
 
     @Override
-    public void getData() {
+    public void getData(boolean isFirst) {
         mView.showData(realmHelper.getLikeData());
     }
 

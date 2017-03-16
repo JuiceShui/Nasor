@@ -29,6 +29,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.sharesdk.onekeyshare.OnekeyShare;
 
 /**
  * 作者： max_Shui on 2016/12/12.
@@ -77,7 +78,8 @@ public class ZhihuDetailActivity extends BaseActivity<ZhuhiNewsPresenter> implem
     private String imgUrl;
     private ZhihuDetailEntity entity;
     private boolean isImageShow=false;
-
+    private String shareUrl;//分享的链接
+    private String shareTitle;//分享的标题
     @Override
     protected void initInject() {
         getActivityComponent().Inject(this);
@@ -136,6 +138,15 @@ public class ZhihuDetailActivity extends BaseActivity<ZhuhiNewsPresenter> implem
             zhihuTVCopyRight.setText(entity.getImage_source());
             String htmlData = HtmlUtil.createHtmlData(entity.getBody(), entity.getCss(), (List<String>) entity.getJs());
             zhihuWebView.loadData(htmlData, HtmlUtil.MIME_TYPE, HtmlUtil.ENCODING);
+            shareUrl=entity.getShare_url();
+            shareTitle=entity.getTitle();
+            tvDetailBottomShare.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    System.out.println(shareTitle+"|||"+shareUrl);
+                        onShare(shareTitle,shareTitle,shareUrl);
+                }
+            });
         }
     }
 
@@ -182,6 +193,30 @@ public class ZhihuDetailActivity extends BaseActivity<ZhuhiNewsPresenter> implem
             mPresenter.insertLike();
         }
     }
+    private void onShare(String title,String content,String link)
+    {
+        OnekeyShare oks = new OnekeyShare();
+//关闭sso授权
+        oks.disableSSOWhenAuthorize();
+// title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间等使用
+        oks.setTitle(title);
+// titleUrl是标题的网络链接，QQ和QQ空间等使用
+        oks.setTitleUrl(link);
+// text是分享文本，所有平台都需要这个字段
+        oks.setText(content);
+// imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
+//oks.setImagePath("/sdcard/test.jpg");//确保SDcard下面存在此张图片
+// url仅在微信（包括好友和朋友圈）中使用
+        oks.setUrl(link);
+// comment是我对这条分享的评论，仅在人人网和QQ空间使用
+        oks.setComment("我是测试评论文本");
+// site是分享此内容的网站名称，仅在QQ空间使用
+        oks.setSite(getString(R.string.app_name));
+// siteUrl是分享此内容的网站地址，仅在QQ空间使用
+        oks.setSiteUrl(link);
+// 启动分享GUI
+        oks.show(this);
+}
     //下方的滑动显示
     private class ScrollerListener implements NestedScrollView.OnScrollChangeListener
     {

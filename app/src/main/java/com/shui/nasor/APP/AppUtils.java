@@ -160,4 +160,12 @@ public class AppUtils {
 
         return s;
     }
+    /**
+     * 获取一个1--max的随机数
+     * @return
+     */
+    public static int getRandomInt(int max) {
+        int num=1+(int)(Math.random()*max);
+        return num;
+    }
 }

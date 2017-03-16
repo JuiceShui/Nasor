@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.shui.nasor.Model.Bean.WeChat.WeChatEntity;
+import com.shui.nasor.Model.Bean.WeChat.WXEntity;
 import com.shui.nasor.R;
 import com.shui.nasor.Utils.ImageLoader;
 import com.shui.nasor.Widget.SquareImageView;
@@ -27,11 +27,11 @@ import butterknife.ButterKnife;
 
 
 public class WeChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private List<WeChatEntity.NewslistBean> mData;
+    private List<WXEntity.NewslistBean> mData;
     private Context context;
     private LayoutInflater mInflater;
     private onItemClickListener listener;
-    public WeChatAdapter(Context context, List<WeChatEntity.NewslistBean> mData) {
+    public WeChatAdapter(Context context, List<WXEntity.NewslistBean> mData) {
         this.context = context;
         this.mData = mData;
         this.mInflater=LayoutInflater.from(context);
@@ -45,7 +45,7 @@ public class WeChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         final WechatHolder wechatHolder= (WechatHolder) holder;
-        final WeChatEntity.NewslistBean bean=mData.get(position);
+        final WXEntity.NewslistBean bean=mData.get(position);
         wechatHolder.tvWechatItemFrom.setText(bean.getDescription());
         wechatHolder.tvWechatItemTime.setText(bean.getCtime());
         wechatHolder.tvWechatItemTitle.setText(bean.getTitle());

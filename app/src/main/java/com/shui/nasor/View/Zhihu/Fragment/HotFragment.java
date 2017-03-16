@@ -15,7 +15,6 @@ import com.shui.nasor.Presenter.HotPresenter;
 import com.shui.nasor.R;
 import com.shui.nasor.View.Zhihu.Activity.ZhihuDetailActivity;
 import com.shui.nasor.View.Zhihu.Adapter.HotAdapter;
-import com.shui.nasor.View.Zhihu.Decoration.SpacesItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +38,6 @@ public class HotFragment extends BaseFragment<HotPresenter> implements HotContra
     @BindView(R.id.hotSwipeRefresh)
     SwipeRefreshLayout hotSwipeRefresh;
     private List<ZhihuHotEntity.RecentBean> mData=new ArrayList<>();
-    private SpacesItemDecoration spacesItemDecoration;
     private HotAdapter mAdapter;
 
     @Override
@@ -54,14 +52,12 @@ public class HotFragment extends BaseFragment<HotPresenter> implements HotContra
 
     @Override
     protected void initEventAndData() {
-        spacesItemDecoration=new SpacesItemDecoration(10);
         hotRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-        hotRecyclerView.addItemDecoration(spacesItemDecoration);
         mAdapter=new HotAdapter(mData,mContext);
         hotRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(this);
         hotSwipeRefresh.setOnRefreshListener(this);
-        mPresenter.getData();
+        mPresenter.getData(true);
     }
 
     @Override
@@ -101,6 +97,6 @@ public class HotFragment extends BaseFragment<HotPresenter> implements HotContra
 
     @Override
     public void onRefresh() {
-        mPresenter.getData();
+        mPresenter.getData(false);
     }
 }

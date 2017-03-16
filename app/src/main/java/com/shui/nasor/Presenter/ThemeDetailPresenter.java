@@ -34,8 +34,10 @@ public class ThemeDetailPresenter extends BaseRxPresenter<ThemeDetailContract.Vi
     }
 
     @Override
-    public void getData(int id) {
-        mView.showLoading();
+    public void getData(int id, final boolean isFirst) {
+        if (isFirst)
+        {
+        mView.showLoading();}
         Subscription subscription=retrofitHelper.loadThemeDetail(id)
                 .compose(RxHelper.<ZhihuThemeDetailEntity>RxTransformer())
                 .map(new Func1<ZhihuThemeDetailEntity, ZhihuThemeDetailEntity>() {
@@ -53,11 +55,17 @@ public class ThemeDetailPresenter extends BaseRxPresenter<ThemeDetailContract.Vi
                     @Override
                     public void call(ZhihuThemeDetailEntity entity) {
                         mView.showContent(entity);
-                        mView.hiddenLoading();
+                        if (isFirst)
+                        {
+                        mView.hiddenLoading();}
                     }
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
+                        if (isFirst)
+                        {
+                            mView.hiddenLoading();
+                        }
                         mView.showError("");
                     }
                 });

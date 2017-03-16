@@ -39,8 +39,10 @@ public class DailyPresenter extends BaseRxPresenter<DailyContract.View> implemen
     }
 
     @Override
-    public void getData() {
-        mView.showLoading();
+    public void getData(final boolean isFirst) {
+        if (isFirst) {
+            mView.showLoading();
+        }
         Subscription subscription=retrofitHelper.loadDaily()
                 .compose(RxHelper.<ZhihuDailyEntity>RxTransformer())
                 .map(new Func1<ZhihuDailyEntity, ZhihuDailyEntity>() {
@@ -60,12 +62,18 @@ public class DailyPresenter extends BaseRxPresenter<DailyContract.View> implemen
                                public void call(ZhihuDailyEntity entity) {
                                    mCount = entity.getTop_stories().size();
                                    mView.ShowContent(entity);
-                                   mView.hiddenLoading();
+                                   if (isFirst) {
+                                       mView.hiddenLoading();
+                                   }
                                }
                            }
                         , new Action1<Throwable>() {
                             @Override
                             public void call(Throwable throwable) {
+                                if (isFirst)
+                                {
+                                    mView.hiddenLoading();
+                                }
                                 mView.showError("数据加载错误T0T");
                             }
                         });

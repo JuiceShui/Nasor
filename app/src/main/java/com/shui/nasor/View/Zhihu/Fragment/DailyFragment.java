@@ -19,7 +19,6 @@ import com.shui.nasor.Utils.CircularAnim;
 import com.shui.nasor.View.Home.WeatherActivity;
 import com.shui.nasor.View.Zhihu.Activity.ZhihuDetailActivity;
 import com.shui.nasor.View.Zhihu.Adapter.DailyAdapter;
-import com.shui.nasor.View.Zhihu.Decoration.SpacesItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +46,6 @@ public class DailyFragment extends BaseFragment<DailyPresenter> implements Daily
     private DailyAdapter mAdapter;
     private List<ZhihuDailyEntity.StoriesBean> mData=new ArrayList<>();
     private List<ZhihuDailyEntity.TopStoriesBean> mTopData=new ArrayList<>();
-    private SpacesItemDecoration spacesItemDecoration;
 
     @Override
     protected View getLoadingTargetView() {
@@ -60,12 +58,10 @@ public class DailyFragment extends BaseFragment<DailyPresenter> implements Daily
     }
     @Override
     protected void initEventAndData() {
-        spacesItemDecoration=new SpacesItemDecoration(15);
-        mPresenter.getData();
+        mPresenter.getData(true);
         mAdapter=new DailyAdapter(mContext,mTopData,mData);
         dailyRecyclerView.setItemAnimator(new DefaultItemAnimator());
         dailyRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-        dailyRecyclerView.addItemDecoration(spacesItemDecoration);
         dailyRecyclerView.setAdapter(mAdapter);
         dailyRefreshLayout.setOnRefreshListener(this);
         mAdapter.setOnItemClickListener(new DailyAdapter.onItemClickListener() {
@@ -117,7 +113,7 @@ public class DailyFragment extends BaseFragment<DailyPresenter> implements Daily
 
     @Override
     public void onRefresh() {
-        mPresenter.getData();
+        mPresenter.getData(false);
     }
     @OnClick(R.id.dailyFloatAcBar)
     public void goToWeather()

@@ -96,7 +96,7 @@ public class NewsFragment extends BaseFragment<NewsPresenter> implements NewsCon
                 isToBottom=isSlideToBottom(recyclerView);
             }
         });
-        mPresenter.getData(tag);
+        mPresenter.getData(tag,true);
     }
 
     @Override
@@ -140,7 +140,7 @@ public class NewsFragment extends BaseFragment<NewsPresenter> implements NewsCon
 
     @Override
     public void onRefresh() {
-        mPresenter.getData(tag);
+        mPresenter.getData(tag,false);
     }
 
     /**

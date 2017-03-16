@@ -44,4 +44,20 @@ public class SharedPreferenceUtils {
     {
         return getAppSp().getString(Constants.SP_USER_INFO,"");
     }
+    public static boolean getUserCancel()
+    {
+        return getAppSp().getBoolean(Constants.SP_USER_CANCEL,false);
+    }
+    public static void setUserCancel(boolean cancel)
+    {
+         getAppSp().edit().putBoolean(Constants.SP_USER_CANCEL,cancel).apply();
+    }
+    public static boolean getUserLogin()
+    {
+        return getAppSp().getBoolean(Constants.SP_USER_Login,false);
+    }
+    public static void setUserLogin(boolean cancel)
+    {
+        getAppSp().edit().putBoolean(Constants.SP_USER_Login,cancel).apply();
+    }
 }

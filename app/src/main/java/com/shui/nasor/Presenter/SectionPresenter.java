@@ -28,19 +28,24 @@ public class SectionPresenter extends BaseRxPresenter<SectionContract.View> impl
     }
 
     @Override
-    public void getData() {
-        mView.showLoading();
+    public void getData(final boolean isFirst) {
+        if (isFirst) {
+            mView.showLoading();
+        }
         Subscription subscription=retrofitHelper.loadSectionList()
                 .compose(RxHelper.<ZhihuSectionListEntity>RxTransformer())
                 .subscribe(new Action1<ZhihuSectionListEntity>() {
                     @Override
                     public void call(ZhihuSectionListEntity entity) {
                         mView.showContent(entity);
-                        mView.hiddenLoading();
+                        if (isFirst)
+                        {
+                        mView.hiddenLoading();}
                     }
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
+                        if (isFirst){mView.hiddenLoading();}
                         mView.showError("");
                     }
                 });

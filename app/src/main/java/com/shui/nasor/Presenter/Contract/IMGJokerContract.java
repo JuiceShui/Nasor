@@ -23,7 +23,7 @@ public interface IMGJokerContract {
     }
     interface Presenter extends BasePresenter<View>
     {
-        void getData();
+        void getData(boolean isFirst);
         void getNextData();
         void getPreData();
     }

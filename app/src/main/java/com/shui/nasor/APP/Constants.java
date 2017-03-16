@@ -44,6 +44,8 @@ public class Constants {
     public static  final String SP_POSITION="position";
     public  static  final String SP_USER_INFO="user_info";
     public static final String SP_USER_ENTITY="user_entity";
+    public  static  final String SP_USER_CANCEL="user_cancel";
+    public  static  final String SP_USER_Login="user_cancel_login";
     //--------------------shareView-----------------
     public static final String SHARE_VIEW = "shareView";
 

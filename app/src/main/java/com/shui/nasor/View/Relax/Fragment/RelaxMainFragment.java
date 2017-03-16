@@ -6,7 +6,7 @@ import android.support.v4.view.ViewPager;
 
 import com.shui.nasor.Base.BaseNormalFragment;
 import com.shui.nasor.R;
-import com.shui.nasor.View.Relax.Adapter.RelaxFragmentAdapter;
+import com.shui.nasor.View.Commen.FragmentAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ public class RelaxMainFragment extends BaseNormalFragment {
     TabLayout vpTab;
     @BindView(R.id.vpPager)
     ViewPager vpPager;
-    private RelaxFragmentAdapter mAdapter;
+    private FragmentAdapter mAdapter;
     private List<Fragment> fragments=new ArrayList<>();
     private String[] title=new String[]{"笑话","趣图","妹纸"};
     @Override
@@ -37,7 +37,7 @@ public class RelaxMainFragment extends BaseNormalFragment {
         fragments.add(new TxTJokerFragment());
         fragments.add(new IMGJokerFragment());
         fragments.add(new GirlFragment());
-        mAdapter=new RelaxFragmentAdapter(getChildFragmentManager(),fragments);
+        mAdapter=new FragmentAdapter(getChildFragmentManager(),fragments);
         vpPager.setAdapter(mAdapter);
         vpTab.addTab(vpTab.newTab().setText(title[0]));
         vpTab.addTab(vpTab.newTab().setText(title[1]));

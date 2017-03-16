@@ -186,7 +186,17 @@ public class UserModifyActivity extends BaseNormalActivity {
         intent.putExtra("name",name);
         startActivityForResult(intent, NAME_MODIFY);
     }
-
+    @OnClick(R.id.modify_rl_cancel)
+    void onCancelClick()
+    {
+        SharedPreferenceUtils.setUser("");
+        SharedPreferenceUtils.setUserCancel(true);
+        Intent intent=new Intent(this,HomeActivity.class);
+        intent.putExtra("cancel","cancel");
+        startActivity(intent);
+        finish();
+        //overridePendingTransition(R.anim.activity_in_anim_transion_horzita_left,R.anim.activity_out_anim_transion_horzital_left);
+    }
     /**
      * 生日选择
      */

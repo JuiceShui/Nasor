@@ -22,7 +22,7 @@ public interface NewsContract  {
     }
     interface Presenter extends BasePresenter<View>
     {
-        void getData(String title);
+        void getData(String title,boolean isFirst);
         void getMore(String title);
         void startChange();//开始切换
         void stopChange();//停止切换

@@ -13,7 +13,6 @@ import com.shui.nasor.Presenter.SectionPresenter;
 import com.shui.nasor.R;
 import com.shui.nasor.View.Zhihu.Activity.SectionDetailActivity;
 import com.shui.nasor.View.Zhihu.Adapter.SectionAdapter;
-import com.shui.nasor.View.Zhihu.Decoration.SpacesItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +35,6 @@ public class SectionFragment extends BaseFragment<SectionPresenter> implements S
     RecyclerView sectionRecyclerView;
     @BindView(R.id.sectionSwipeRefresh)
     SwipeRefreshLayout sectionSwipeRefresh;
-    private SpacesItemDecoration spacesItemDecoration;
     private SectionAdapter mAdapter;
     private List<ZhihuSectionListEntity.DataBean> mData=new ArrayList<>();
 
@@ -52,14 +50,12 @@ public class SectionFragment extends BaseFragment<SectionPresenter> implements S
 
     @Override
     protected void initEventAndData() {
-        spacesItemDecoration=new SpacesItemDecoration(5);
         sectionRecyclerView.setLayoutManager(new GridLayoutManager(mContext,2));
-        sectionRecyclerView.addItemDecoration(spacesItemDecoration);
         mAdapter=new SectionAdapter(mData,mContext);
         sectionRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(this);
         sectionSwipeRefresh.setOnRefreshListener(this);
-        mPresenter.getData();
+        mPresenter.getData(true);
     }
 
     @Override
@@ -95,6 +91,6 @@ public class SectionFragment extends BaseFragment<SectionPresenter> implements S
 
     @Override
     public void onRefresh() {
-        mPresenter.getData();
+        mPresenter.getData(false);
     }
 }

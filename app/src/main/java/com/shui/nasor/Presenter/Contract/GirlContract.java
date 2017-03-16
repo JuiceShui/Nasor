@@ -21,7 +21,7 @@ public interface GirlContract {
     }
     interface Presenter extends BasePresenter<View>
     {
-        void getData();
+        void getData(boolean isFirst);
         void getMore();
     }
 }

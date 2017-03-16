@@ -22,7 +22,7 @@ public interface LikeContract {
     }
     interface Presenter extends BasePresenter<View>
     {
-        void getData();
+        void getData(boolean isFirst);
         void deleteData(String id);
         void changeTime(String id,long time,boolean isUp);
     }

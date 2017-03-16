@@ -77,7 +77,7 @@ public class GirlFragment extends BaseFragment<GirlPresenter> implements GirlCon
             }
         });
         mAdapter.setListener(this);
-        mPresenter.getData();
+        mPresenter.getData(true);
     }
 
     @Override
@@ -117,7 +117,7 @@ public class GirlFragment extends BaseFragment<GirlPresenter> implements GirlCon
 
     @Override
     public void onRefresh() {
-        mPresenter.getData();
+        mPresenter.getData(false);
     }
 
     @Override

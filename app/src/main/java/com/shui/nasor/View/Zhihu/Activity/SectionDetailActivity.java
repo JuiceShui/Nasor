@@ -62,7 +62,7 @@ public class SectionDetailActivity extends BaseActivity<SectionDetailPresenter> 
         sectionDetailRecyclerView.setAdapter(mAdapter);
         sectionDetailSwipeRefresh.setOnRefreshListener(this);
         mAdapter.setItemClickListener(this);
-        mPresenter.getData(id);
+        mPresenter.getData(id,true);
     }
 
     @Override
@@ -84,7 +84,7 @@ public class SectionDetailActivity extends BaseActivity<SectionDetailPresenter> 
     }
     @Override
     public void onRefresh() {
-        mPresenter.getData(id);
+        mPresenter.getData(id,false);
     }
     //item的点击
     @Override

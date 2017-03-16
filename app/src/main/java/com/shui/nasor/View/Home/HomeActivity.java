@@ -8,6 +8,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,6 +37,8 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.QueryListener;
 import me.yokeyword.fragmentation.SupportFragment;
+
+import static com.shui.nasor.Utils.SharedPreferenceUtils.getUser;
 
 public class HomeActivity extends BaseNormalActivity {
 
@@ -88,13 +91,85 @@ public class HomeActivity extends BaseNormalActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        boolean isCancel=SharedPreferenceUtils.getUserCancel();
+        boolean notHaveUser=false;
+        boolean isLogin=SharedPreferenceUtils.getUserLogin();
+        String user=SharedPreferenceUtils.getUser();
+        if (user==null||user.equals(""))
+        {
+            notHaveUser=true;
+        }
+        else {
+            notHaveUser=false;
+        }
+        if ((isCancel&&notHaveUser)||(isLogin&&!notHaveUser))
+        {
+            drawerLayout.openDrawer(Gravity.LEFT);
+        }
+        else {
+            drawerLayout.closeDrawers();
+        }
+        SharedPreferenceUtils.setUserCancel(false);
+        SharedPreferenceUtils.setUserLogin(false);
+        userInfo=SharedPreferenceUtils.getUser();
+        if (userInfo=="")//当没有登录的时候
+        {
+            System.out.println("user null");
+            iv_avatar.setImageResource(R.drawable.header);
+            tv_name.setVisibility(View.INVISIBLE);
+            tv_email.setVisibility(View.VISIBLE);
+            tv_email.setText(App.getInstance().getString(R.string.click_to_logo));
+            iv_avatar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    CircleImageView imageView= (CircleImageView) findViewById(R.id.nav_image_header);
+                    Intent intent=new Intent(HomeActivity.this,LoginActivity.class);
+                    ActivityOptions options=ActivityOptions.makeSceneTransitionAnimation(HomeActivity.this,imageView,Constants.SHARE_VIEW);
+                    //startActivity(intent,options.toBundle());
+                    startActivityForResult(intent,Constants.ACTIVITY_REQUEST,options.toBundle());
+                }
+            });
+        }
+        else //当已经登陆的时候
+        {
+            System.out.println("user have");
+            iv_avatar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    System.out.println("have on click");
+                    CircleImageView imageView= (CircleImageView) findViewById(R.id.nav_image_header);
+                    Intent intent=new Intent(HomeActivity.this,UserInfoActivity.class);
+                    ActivityOptions options=ActivityOptions.makeSceneTransitionAnimation(HomeActivity.this,imageView,Constants.SHARE_VIEW);
+                    startActivity(intent,options.toBundle());
+                }
+            });
+            BmobQuery<BombUserEntity> bmobQuery = new BmobQuery<>();
+            bmobQuery.getObject(userInfo, new QueryListener<BombUserEntity>() {
+                @Override
+                public void done(BombUserEntity userInfo, BmobException e) {
+                    if (e==null)
+                    {
+                        System.out.println("enter there");
+                        tv_email.setVisibility(View.VISIBLE);
+                        tv_name.setVisibility(View.VISIBLE);
+                        tv_name.setText(userInfo.getName());
+                        tv_email.setText(userInfo.getEmail());
+                    }
+                }
+            });
+        }
+    }
+
+    @Override
     protected void initEventAndData() {
         //设置 navigtionView的headvView
         header_view=navView.inflateHeaderView(R.layout.nav_header_home);
         iv_avatar= (CircleImageView) header_view.findViewById(R.id.nav_image_header);
         tv_name= (TextView) header_view.findViewById(R.id.nav_tv_name);
         tv_email= (TextView) header_view.findViewById(R.id.nav_tv_email);
-        userInfo=SharedPreferenceUtils.getUser();
+        userInfo= getUser();
         if (userInfo=="")//当没有登录的时候
         {
             System.out.println("user null");
@@ -315,7 +390,6 @@ public class HomeActivity extends BaseNormalActivity {
             if (data!=null) {
                 tv_name.setVisibility(View.VISIBLE);
                 tv_name.setText(data.getStringExtra("name"));
-                System.out.println("name"+data.getStringExtra("name"));
             }
         }
     }

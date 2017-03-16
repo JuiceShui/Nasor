@@ -90,7 +90,7 @@ public class LikeFragment extends BaseFragment<LikePresenter> implements LikeCon
         mItemTouchHelper.setSwipeEnable(true);//设置可滑动
         ItemTouchHelper helper=new ItemTouchHelper(mItemTouchHelper);
         helper.attachToRecyclerView(likeRecyclerView);//绑定recyclerView
-        mPresenter.getData();
+        mPresenter.getData(true);
     }
 
     @Override
@@ -115,7 +115,7 @@ public class LikeFragment extends BaseFragment<LikePresenter> implements LikeCon
     public void onResume() {
         super.onResume();
         if (!isFirst) {
-            mPresenter.getData();
+            mPresenter.getData(true);
         }
     }
 }

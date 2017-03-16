@@ -26,7 +26,7 @@ import butterknife.BindView;
  */
 
 
-public class WeatherActivity extends BaseActivity<WeatherPresenter> implements WeatherContract.View {
+public class  WeatherActivity extends BaseActivity<WeatherPresenter> implements WeatherContract.View {
 
     @BindView(R.id.weatherIVHeader)
     ImageView weatherIVHeader;

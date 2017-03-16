@@ -9,7 +9,7 @@ import android.view.View;
 
 import com.shui.nasor.APP.Constants;
 import com.shui.nasor.Base.BaseFragment;
-import com.shui.nasor.Model.Bean.WeChat.WeChatEntity;
+import com.shui.nasor.Model.Bean.WeChat.WXEntity;
 import com.shui.nasor.Presenter.Contract.WeChatContract;
 import com.shui.nasor.Presenter.WechatPresenter;
 import com.shui.nasor.R;
@@ -40,7 +40,7 @@ public class WeChatFragment extends BaseFragment<WechatPresenter> implements WeC
     SwipeRefreshLayout wechatSwipeLayout;
     private WeChatAdapter mAdapter;
     private SpacesItemDecoration spacesItemDecoration;
-    private List<WeChatEntity.NewslistBean> mData=new ArrayList<>();
+    private List<WXEntity.NewslistBean> mData=new ArrayList<>();
     private boolean isLastItem=false;//是否下滑到了底部
 
     @Override
@@ -79,7 +79,7 @@ public class WeChatFragment extends BaseFragment<WechatPresenter> implements WeC
                 isLastItem= isSlideToBottom(recyclerView);
             }
         });
-        mPresenter.getData();
+        mPresenter.getData(true);
     }
     @Override
     protected int getLayout() {
@@ -87,7 +87,7 @@ public class WeChatFragment extends BaseFragment<WechatPresenter> implements WeC
     }
 
     @Override
-    public void showContent(WeChatEntity entity) {
+    public void showContent(WXEntity entity) {
         if (wechatSwipeLayout.isRefreshing())
         {
             wechatSwipeLayout.setRefreshing(false);
@@ -98,13 +98,13 @@ public class WeChatFragment extends BaseFragment<WechatPresenter> implements WeC
     }
 
     @Override
-    public void showMore(WeChatEntity entity) {
+    public void showMore(WXEntity entity) {
         mData.addAll(entity.getNewslist());
         mAdapter.notifyDataSetChanged();
     }
 
     @Override
-    public void showSearch(WeChatEntity entity) {
+    public void showSearch(WXEntity entity) {
         mData.clear();
         mData.addAll(entity.getNewslist());
         mAdapter.notifyDataSetChanged();
@@ -117,7 +117,7 @@ public class WeChatFragment extends BaseFragment<WechatPresenter> implements WeC
 
     @Override
     public void onRefresh() {
-        mPresenter.getData();
+        mPresenter.getData(false);
     }
     /**
      * 检验是否已经显示到了最后一个item
@@ -134,7 +134,7 @@ public class WeChatFragment extends BaseFragment<WechatPresenter> implements WeC
 
     @Override
     public void onItemClick(View shareView, int position) {
-        WeChatEntity.NewslistBean bean=mData.get(position);
+        WXEntity.NewslistBean bean=mData.get(position);
         Intent intent=new Intent(mContext, WeChatActivity.class);
         intent.putExtra("id",bean.getPicUrl());
         intent.putExtra("title",bean.getTitle());

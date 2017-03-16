@@ -39,8 +39,11 @@ public class NewsPresenter extends BaseRxPresenter<NewsContract.View> implements
         this.retrofitHelper = retrofitHelper;
     }
     @Override
-    public void getData(String title) {
+    public void getData(String title, final boolean isFirst) {
+        if (isFirst)
+        {
         mView.showLoading();
+        }
         if (title==""|| TextUtils.isEmpty(title))
         {
             Subscription subscription=retrofitHelper.loadLastedNews(page)
@@ -64,11 +67,17 @@ public class NewsPresenter extends BaseRxPresenter<NewsContract.View> implements
                         @Override
                         public void call(NewsEntity entity) {
                             mView.showData(entity);
-                            mView.hiddenLoading();
+                            if (isFirst) {
+                                mView.hiddenLoading();
+                            }
                         }
                     }, new Action1<Throwable>() {
                         @Override
                         public void call(Throwable throwable) {
+                            if (isFirst)
+                            {
+                                mView.hiddenLoading();
+                            }
                             mView.showError("加载出错啦~~~~");
 
                         }
@@ -95,11 +104,17 @@ public class NewsPresenter extends BaseRxPresenter<NewsContract.View> implements
                         @Override
                         public void call(NewsEntity entity) {
                             mView.showData(entity);
-                            mView.hiddenLoading();
+                            if (isFirst) {
+                                mView.hiddenLoading();
+                            }
                         }
                     }, new Action1<Throwable>() {
                         @Override
                         public void call(Throwable throwable) {
+                            if (isFirst)
+                            {
+                                mView.hiddenLoading();
+                            }
                             mView.showError("加载出错啦~~~~");
                         }
                     });

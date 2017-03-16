@@ -1,10 +1,9 @@
 package com.shui.nasor.Http;
 
 
-import com.shui.nasor.Model.Bean.WeChat.WeChatEntity;
+import com.shui.nasor.Model.Bean.WeChat.WXEntity;
 
 import retrofit2.http.GET;
-import retrofit2.http.Headers;
 import retrofit2.http.Query;
 import rx.Observable;
 
@@ -18,21 +17,28 @@ import rx.Observable;
 
 
 public interface WeChatApi {
-    String HOST_LINK="http://apis.baidu.com/txapi/weixin/";
+    String HOST_LINK="https://api.tianapi.com/";
+    String APIKEY="f8d6bf3d8a2e5daa7fd6eaf1cfbe5439";
+    int SigleCount=20;//每次数据的返回数
 
     /**
-     * 获取微信列表
-     * @param num 返回信息的最大值
-     * @param page 返回的页数
-     * @param word 查询关键词
+     * 获取
+     * @param key
+     * @param num
+     * @param page
      * @return
      */
-    @Headers("apikey:807cc4515ba35ede5a5e2979542e9a86")
-    @GET("wxhot")
-    Observable<WeChatEntity> getWeChatSearch(@Query("num") int num, @Query("page") int page, @Query("word") String word);
+    @GET("/wxnew/")
+    Observable<WXEntity> getWXInfo(@Query("key") String key,@Query("num") int num,@Query("page") int page);
 
-
-    @Headers("apikey:807cc4515ba35ede5a5e2979542e9a86")
-    @GET("wxhot")
-    Observable<WeChatEntity> getWeChatInfo(@Query("num") int num, @Query("page") int page);
+    /**
+     * 查询
+     * @param key
+     * @param num
+     * @param page
+     * @param word
+     * @return
+     */
+    @GET("/wxnew/")
+    Observable<WXEntity> getWXInfoSearch(@Query("key") String key,@Query("num") int num,@Query("page") int page,@Query("word") String word);
 }

@@ -13,7 +13,6 @@ import com.shui.nasor.Presenter.ThemePresenter;
 import com.shui.nasor.R;
 import com.shui.nasor.View.Zhihu.Activity.ThemeDetailActivity;
 import com.shui.nasor.View.Zhihu.Adapter.ThemeAdapter;
-import com.shui.nasor.View.Zhihu.Decoration.SpacesItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +37,7 @@ public class ThemeFragment extends BaseFragment<ThemePresenter> implements Theme
     SwipeRefreshLayout themeSwipeRefresh;
     private List<ZhihuThemeListEntity.OthersBean> mData=new ArrayList<>();
     private ThemeAdapter mAdapter;
-    SpacesItemDecoration spacesItemDecoration;
+    //SpacesItemDecoration spacesItemDecoration;
 
     @Override
     protected View getLoadingTargetView() {
@@ -52,12 +51,12 @@ public class ThemeFragment extends BaseFragment<ThemePresenter> implements Theme
 
     @Override
     protected void initEventAndData() {
-        spacesItemDecoration=new SpacesItemDecoration(8);
+        //spacesItemDecoration=new SpacesItemDecoration(8);
         themeRecyclerView.setLayoutManager(new GridLayoutManager(mContext,2));
         mAdapter=new ThemeAdapter(mData,mContext);
-        themeRecyclerView.addItemDecoration(spacesItemDecoration);
+        //themeRecyclerView.addItemDecoration(spacesItemDecoration);
         themeRecyclerView.setAdapter(mAdapter);
-        mPresenter.getData();
+        mPresenter.getData(true);
         themeSwipeRefresh.setOnRefreshListener(this);
         mAdapter.setOnItemClickListener(new ThemeAdapter.onItemClickListener() {
             @Override
@@ -96,6 +95,6 @@ public class ThemeFragment extends BaseFragment<ThemePresenter> implements Theme
 
     @Override
     public void onRefresh() {
-        mPresenter.getData();
+        mPresenter.getData(false);
     }
 }

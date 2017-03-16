@@ -34,8 +34,10 @@ public class HotPresenter extends BaseRxPresenter<HotContract.View> implements H
     }
 
     @Override
-    public void getData() {
-        mView.showLoading();
+    public void getData(final boolean isFirst) {
+        if (isFirst) {
+            mView.showLoading();
+        }
         Subscription subscription=retrofitHelper.loadHotList()
                 .compose(RxHelper.<ZhihuHotEntity>RxTransformer())
                 .map(new Func1<ZhihuHotEntity, ZhihuHotEntity>() {
@@ -54,11 +56,17 @@ public class HotPresenter extends BaseRxPresenter<HotContract.View> implements H
                     @Override
                     public void call(ZhihuHotEntity zhihuHotEntity) {
                         mView.showContent(zhihuHotEntity);
-                        mView.hiddenLoading();
+                        if (isFirst) {
+                            mView.hiddenLoading();
+                        }
                     }
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
+                        if (isFirst)
+                        {
+                            mView.hiddenLoading();
+                        }
                         mView.showError("yoyo~~出问题了。。。");
                     }
                 });

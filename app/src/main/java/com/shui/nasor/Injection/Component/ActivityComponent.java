@@ -8,6 +8,7 @@ import com.shui.nasor.View.Home.HomeActivity;
 import com.shui.nasor.View.Home.UserInfoActivity;
 import com.shui.nasor.View.Home.WeatherActivity;
 import com.shui.nasor.View.Home.WelcomeActivity;
+import com.shui.nasor.View.Home.WelcomeActivityNew;
 import com.shui.nasor.View.Zhihu.Activity.SectionDetailActivity;
 import com.shui.nasor.View.Zhihu.Activity.ThemeDetailActivity;
 import com.shui.nasor.View.Zhihu.Activity.ZhihuDetailActivity;
@@ -32,4 +33,5 @@ public interface ActivityComponent {
     void Inject(SectionDetailActivity sectionDetailActivity);
     void Inject(WeatherActivity weatherActivity);
     void Inject(UserInfoActivity userInfoActivity);
+    void Inject(WelcomeActivityNew welcomeActivityNew);
 }

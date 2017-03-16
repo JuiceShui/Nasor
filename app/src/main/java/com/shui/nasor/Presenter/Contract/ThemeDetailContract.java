@@ -20,7 +20,7 @@ public interface ThemeDetailContract  {
     }
     interface Presenter extends BasePresenter<View>
     {
-        void getData(int id);
+        void getData(int id,boolean isFirst);
         void insertRead(int id);
     }
 }
