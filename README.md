@@ -7,7 +7,7 @@
 * Fragment懒加载<br>
 * SwipeRefreshLayout,RecyclerView刷新、加载更多<br>
 * Material Design 控件<br>
-* 将某些信息缓存在本地数据库br>
+* 将某些信息缓存在本地数据库<br>
 * 以及其他一些知识<br>
 ##### 主要用到的第三方库：<br>
 * Rxjava<br>
